@@ -1,0 +1,36 @@
+{
+    "name":  "sistem-akademik-master-demo",
+    "version":  "0.1.0",
+    "private":  true,
+    "scripts":  {
+                    "dev":  "next dev",
+                    "build":  "prisma generate \u0026\u0026 prisma db push --accept-data-loss \u0026\u0026 next build",
+                    "start":  "next start",
+                    "lint":  "eslint"
+                },
+    "dependencies":  {
+                         "@prisma/adapter-pg":  "^7.8.0",
+                         "@prisma/client":  "^7.8.0",
+                         "@vercel/blob":  "^2.8.0",
+                         "bcryptjs":  "^3.0.3",
+                         "googleapis":  "^174.0.1",
+                         "html2canvas":  "^1.4.1",
+                         "html5-qrcode":  "^2.3.8",
+                         "jimp":  "^0.16.13",
+                         "jspdf":  "^4.2.1",
+                         "next":  "16.2.10",
+                         "pg":  "^8.22.0",
+                         "qrcode.react":  "^4.2.0",
+                         "react":  "19.2.4",
+                         "react-dom":  "19.2.4",
+                         "xlsx":  "^0.18.5"
+                     },
+    "devDependencies":  {
+                            "eslint":  "^9",
+                            "eslint-config-next":  "16.2.10",
+                            "prisma":  "^7.8.0"
+                        },
+    "prisma":  {
+                   "seed":  "node prisma/seed.js"
+               }
+}

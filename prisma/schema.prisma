@@ -1,0 +1,804 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model School {
+  @@map("smk_School")
+  id           Int      @id @default(1)
+  nama         String   @default("SEKOLAH MENENGAH KEJURUAN (SMK) AL QODIRIYAH WINDUSARI")
+  npsn         String   @default("69901347")
+  alamat       String   @default("Jegedeh Wahyurejo, Candisari, Windusari, Magelang")
+  logo         String   @default("🏫")
+  kepsek       String   @default("KH. Ahmad Qodir, M.Pd.I.")
+  kepsekNip    String   @default("197508172005011002")
+  kepsekSignature String? @default("")
+  kepsekUsername String @default("kepsek")
+  kepsekPassword String @default("kepsek123")
+  tteEnabled     Boolean  @default(false)
+  tteProvider    String   @default("BSrE")
+  tteId          String   @default("")
+  semester     String   @default("Ganjil")
+  tahunAjaran  String   @default("2026/2027")
+  tanggalCetak String   @default("4 Juli 2026")
+  utsMode      String   @default("online")
+  uasMode      String   @default("offline")
+  pajMode      String   @default("offline")
+  yayasan      String   @default("YAYASAN AL QODIRIYAH HASAN IBRAHIM")
+  skIjin       String   @default("188.4/61081/20.2b/2015")
+  nss          String   @default("202030816051")
+  telepon      String   @default("085228476578, 08587399500")
+  email        String   @default("smpalqodiriyah@gmail.com")
+  komite       String   @default("H. Suyanto, S.Pd.")
+  kepalaTu     String   @default("Budi Santoso, S.Kom.")
+  wakaKur      String   @default("Siti Rahma, S.Pd.")
+  wakaSis      String   @default("Aris Munandar, S.Or.")
+
+  // Konten Halaman Beranda (Home)
+  heroTitle      String   @default("Membentuk Generasi Berakhlak & Berprestasi")
+  heroSubtitle   String   @default("SMP Master Demo Windusari memadukan keunggulan akademis dengan pembinaan akhlak mulia dan karakter Islami untuk mempersiapkan masa depan putra-putri Anda.")
+  sambutanTitle  String   @default("Selamat Datang di SMP Master Demo Windusari")
+  sambutanText   String   @default("Pendidikan bukanlah sekadar mengisi wadah yang kosong, melainkan menyalakan api karakter dan ilmu. Di SMP Master Demo, kami berkomitmen untuk melahirkan insan-insan cerdas yang tidak hanya unggul secara akademis, namun juga memiliki kedalaman akhlak yang berlandaskan nilai-nilai Al-Qur'an dan Sunnah.")
+  sambutanAuthor String   @default("Fajar Nur Aktorika D.S, S.Pd.Si, M.Pd.")
+
+  // Konten Halaman Profil
+  sejarahTitle   String   @default("Perjalanan SMP Master Demo")
+  sejarahText    String   @default("SMP Master Demo Windusari didirikan dengan cita-cita luhur untuk menyediakan sarana pendidikan tingkat menengah yang berkualitas, terjangkau, dan sarat akan pembinaan moral keagamaan bagi masyarakat di kawasan lereng Gunung Sumbing, Windusari, Magelang.\n\nBermula dari sebuah gagasan para tokoh agama dan masyarakat setempat, sekolah ini secara resmi mulai beroperasi pada tahun 2012 di bawah naungan Yayasan Master Demo. Dengan tekad yang kuat, sarana dan prasarana belajar terus dikembangkan secara bertahap hingga menjadi seperti sekarang ini.\n\nHingga kini, SMP Master Demo telah meluluskan ratusan alumni yang telah berkiprah di berbagai jenjang pendidikan lanjutan, baik sekolah menengah atas favorit, pondok pesantren, maupun dunia kerja profesional, dengan tetap memegang teguh karakter luhur Islami yang diajarkan selama masa sekolah.")
+  visiText       String   @default("Terwujudnya insan yang bertakwa, berakhlak mulia, berprestasi tinggi, menguasai ilmu pengetahuan teknologi, dan berwawasan lingkungan.")
+  misiText       String   @default("Menyelenggarakan proses pembelajaran yang mengintegrasikan nilai-nilai Islam dengan kurikulum nasional.;Membina karakter siswa melalui pembiasaan ibadah, budi pekerti, dan kepemimpinan Islami.;Mengembangkan potensi akademik dan non-akademik siswa secara maksimal melalui bimbingan intensif dan ekstrakurikuler.;Menyediakan sarana prasarana penunjang pembelajaran yang memadai berbasis teknologi informasi.;Mewujudkan lingkungan sekolah yang bersih, sehat, ramah anak, dan peduli terhadap kelestarian alam.")
+
+  // Konten Halaman Akademik
+  akademikText   String   @default("SMP Master Demo Windusari menerapkan Kurikulum Merdeka yang dikolaborasikan secara dinamis dengan kurikulum pesantren. Hal ini bertujuan untuk menyeimbangkan pencapaian kompetensi global dengan pembentukan akhlakul karimah yang tangguh.")
+  kurikulumDetail String  @default("Kurikulum Merdeka & Bimbingan Kepesantrenan")
+  jamBelajar      String  @default("Senin - Sabtu, Jam 07:00 - 13:30 WIB")
+  kriteriaLulus   String  @default("Kehadiran minimal 90%, Menyelesaikan seluruh program pembelajaran, Berkelakuan baik dengan nilai kepribadian minimal Baik, Mengikuti ujian sekolah tulis dan praktik.")
+
+  // Konten Halaman Galeri (dipisahkan dengan semicolon)
+  galeriImages    String   @default("/hero_school.jpg;/facility_computer.jpg;/extracurricular_scout.jpg;/news_silat.jpg;/news_ramadhan.jpg;/principal_headmaster.jpg")
+
+  // Konten Halaman Kontak
+  googleMapsUrl   String   @default("https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15822.428766153664!2d110.15555416279612!3d-7.447814234509172!2m3!1f0!2f0!3f0!3m2!1i1024|2i768!4f13.1!3m3!1m2!1s0x2e7a89279a07153b%3A0xe54bb3f0ba2b528a!2sWahyurejo%2C%20Candisari%2C%20Windusari%2C%20Magelang%2C%20Central%20Java!5e0!3m2!1sen!2sid!4v1720260000000!5m2!1sen!2sid")
+  jamPelayanan    String   @default("Senin - Sabtu: 07:30 - 14:00 WIB")
+  schoolIp        String?
+  batasJamHadirSiswa String @default("07:00") // Toleransi jam masuk siswa
+  batasJamHadirGuru  String @default("06:45") // Toleransi jam masuk guru
+  rateHonorPokok  Int      @default(25000)
+  rateTransport   Int      @default(50000)
+  rateInsentif    Int      @default(15000)
+}
+
+model Teacher {
+  @@map("smk_Teacher")
+  id               String   @id @default(uuid())
+  name             String
+  nip              String   @default("-")
+  subjects         String[]
+  extracurriculars String[] // Ekskul yang diampu guru
+  role             String   // "wali-kelas" atau "guru-mapel"
+  kelas            String   @default("")
+  username         String   @unique
+  password         String
+  foto             String?
+  signature        String? // Tanda Tangan Guru/Wali Kelas
+  isBendahara      Boolean  @default(false)
+  isTU             Boolean  @default(false)
+  isPerpus         Boolean  @default(false)
+  isSarpras        Boolean  @default(false)
+  isWakaKurikulum  Boolean  @default(false)
+  isWakaKesiswaan  Boolean  @default(false)
+  isKaprodiDkv     Boolean  @default(false)
+  jamMengajar      Int      @default(0)
+  jabatan          String   @default("-")
+  customInsentifRate Int?   // Tarif insentif khusus (opsional)
+  tunjangan        Int      @default(0)
+  customInsentif   Int?
+  unit             String   @default("SMK") // SMP, SMK, SMP,SMK
+  attendances      TeacherAttendance[]
+  teachingJournals TeachingJournal[]
+  payrollRecords   PayrollRecord[]
+  assignments      Assignment[]
+  sppds            Sppd[]
+}
+
+model Student {
+  @@map("smk_Student")
+  id                    String                 @id @default(uuid())
+  name                  String
+  nisn                  String                 @unique
+  nis                   String                 @default("-")
+  jenisKelamin          String                 @default("")
+  kelas                 String                 @default("")
+  alamat                String                 @default("")
+  namaOrangTua          String                 @default("")
+  namaAyah              String                 @default("")
+  namaIbu               String                 @default("")
+  pekerjaanAyah         String                 @default("")
+  pekerjaanIbu          String                 @default("")
+  asalSekolah           String                 @default("")
+  tempatLahir           String                 @default("")
+  tanggalLahir          String                 @default("")
+  tanggalMasuk          String                 @default("")
+  semester              String                 @default("Ganjil")
+  tahunAjaran           String                 @default("2026/2027")
+  unit String @default("SMK") // SMP / SMK
+  status String @default("AKTIF") // AKTIF, LULUS, PINDAH, KELUAR
+  jurusan               String                 @default("")    // Khusus SMK: TKJ, AKL, TBO, dll
+  username              String                 @unique
+  password              String
+  profilePhoto          String                 @default("") // URL foto profil siswa
+  grades                Grade[]
+  extracurricularGrades ExtracurricularGrade[]
+  raporRecords          RaporRecord[]
+  examSubmissions       ExamSubmission[]
+  attendances           StudentAttendance[]
+  journalAttendances    JournalAttendance[]
+  tracerStudy           TracerStudy?
+  journalGrades         JournalGrade[]
+  ekskulAttendances     EkskulAttendance[]
+  extracurriculars      String[]               // Daftar nama ekskul yang diikuti siswa
+  payments              StudentPayment[]
+  portfolios            Portfolio[]
+  bookLoans             BookLoan[]
+  assignmentGroupMembers AssignmentGroupMember[]
+  assignmentSubmissions AssignmentSubmission[]
+  pklPlacement  PklPlacement?
+  ukkExams      UkkExam[]
+}
+
+model Subject {
+  @@map("smk_Subject")
+  id   String @id @default(uuid())
+  name String @unique
+  unit String @default("SMK") // SMP, SMK, ALL
+  jurusan String @default("") // Khusus SMK
+  kelompok String @default("A") // A (Nasional), B (Kewilayahan), C (Produktif/Kejuruan)
+  untuk_kelas String @default("Semua") // X, XI, XII, Semua
+  untuk_semester String @default("Semua") // 1, 2, 3, 4, 5, 6, Semua
+  kkm  Int    @default(75)
+  cpA  String @default("Sangat baik dalam menguasai seluruh materi pelajaran.")
+  cpB  String @default("Baik dalam menguasai sebagian besar materi pelajaran.")
+  cpC  String @default("Cukup dalam menguasai beberapa materi pelajaran.")
+  cpD  String @default("Kurang dalam memahami kompetensi dasar pelajaran.")
+  cps  Json?
+}
+
+model Extracurricular {
+  @@map("smk_Extracurricular")
+  id   String @id @default(uuid())
+  name String @unique
+}
+
+model ExtracurricularGrade {
+  @@map("smk_ExtracurricularGrade")
+  id          String  @id @default(uuid())
+  studentNisn String
+  student     Student @relation(fields: [studentNisn], references: [nisn], onDelete: Cascade)
+  ekskulName  String
+  nilai       String  // Predikat: A, B, C, D
+  deskripsi   String  // Deskripsi penilaian
+  semester    String  // Semester 1-6
+
+  @@unique([studentNisn, ekskulName, semester])
+}
+
+model EkskulSession {
+  @@map("smk_EkskulSession")
+  id          String             @id @default(uuid())
+  ekskulName  String             // Nama ekskul
+  date        String             // Tanggal pertemuan (YYYY-MM-DD)
+  keterangan  String             @default("") // Topik/keterangan pertemuan
+  createdById String             // ID guru yang mencatat
+  attendances EkskulAttendance[]
+}
+
+model EkskulAttendance {
+  @@map("smk_EkskulAttendance")
+  id          String        @id @default(uuid())
+  sessionId   String
+  session     EkskulSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  studentNisn String
+  student     Student       @relation(fields: [studentNisn], references: [nisn], onDelete: Cascade)
+  status      String        // HADIR / TIDAK_HADIR / IZIN / SAKIT
+
+  @@unique([sessionId, studentNisn])
+}
+
+model Question {
+  @@map("smk_Question")
+  id             Int      @id @default(autoincrement())
+  subject        String
+  question       String   @db.Text
+  imagePath      String?
+  type           String   @default("PG") // PG, PGK, MENJODOHKAN, ISIAN, ESSAY
+  category       String   @default("UTS") // UTS, UAS, PAJ
+  semester       String   @default("1")
+  kelas          String   @default("VII")
+  unit String @default("SMK") // SMP, SMK
+  jurusan        String   @default("")    // Khusus SMK
+  choices        String[] // Opsi untuk PG & PGK (e.g. A, B, C, D)
+  choicesImages  String[]
+  correct        Int      @default(0) // Indeks jawaban benar untuk PG (0-3)
+  correctChoices Int[]    // Indeks jawaban benar untuk PGK (e.g. [0, 2])
+  correctAnswer  String   @default("") // Jawaban singkat untuk ISIAN, atau kunci pencocokan untuk MENJODOHKAN
+  matchingLeft   String[] // Pasangan kiri untuk MENJODOHKAN
+  matchingLeftImages String[]
+  matchingRight  String[] // Pasangan kanan untuk MENJODOHKAN
+  matchingRightImages String[]
+  groupId        String?
+  groupText      String?  @db.Text
+  groupImagePath String?
+}
+
+model Grade {
+  @@map("smk_Grade")
+  id          String  @id @default(uuid())
+  studentNisn String
+  student     Student @relation(fields: [studentNisn], references: [nisn], onDelete: Cascade)
+  subjectName String
+  tugas1      Int     @default(0)
+  tugas2      Int     @default(0)
+  portofolio  Int?    @default(0) // Nilai rata-rata rubrik portofolio DKV
+  uts         Int?
+  uas         Int?
+  paj         Int?    // Penilaian Akhir Jenjang khusus Semester 6
+  semester    String  @default("1") // Semester 1-6
+
+  @@unique([studentNisn, subjectName, semester])
+}
+
+model RaporRecord {
+  @@map("smk_RaporRecord")
+  id          String   @id @default(uuid())
+  studentNisn String
+  student     Student  @relation(fields: [studentNisn], references: [nisn], onDelete: Cascade)
+  semester    String   // Semester 1-6
+  catatanWali String   @default("")
+  sakit       Int      @default(0)
+  izin        Int      @default(0)
+  alfa        Int      @default(0)
+  naikKelas   Boolean? // null: belum ditentukan, true: Naik/Lulus, false: Tinggal/Tidak Lulus
+
+  @@unique([studentNisn, semester])
+}
+
+model TryOutPackage {
+  @@map("smk_TryOutPackage")
+  id          String   @id @default(uuid())
+  title       String   // e.g. "UCO 1 SMK"
+  unit        String   @default("SMK") 
+  kelas       String   @default("XII") 
+  startDate   String   // Waktu mulai (YYYY-MM-DD HH:mm)
+  endDate     String   // Waktu berakhir (YYYY-MM-DD HH:mm)
+  duration    Int      @default(120) // Durasi pengerjaan (menit)
+  status      String   @default("DRAFT") // DRAFT, PUBLISHED, CLOSED
+  createdAt   DateTime @default(now())
+}
+
+model ExamSubmission {
+  @@map("smk_ExamSubmission")
+  id          String   @id @default(uuid())
+  studentNisn String
+  student     Student  @relation(fields: [studentNisn], references: [nisn], onDelete: Cascade)
+  subjectName String
+  category    String   // UTS, UAS, PAJ
+  semester    String
+  score       Int
+  answers     Json     // Menyimpan map jawaban siswa: { [questionId]: jawaban }
+  essayScores Json?    // Menyimpan map nilai manual essay: { [questionId]: nilai_0_100 }
+  filePath    String?  // Path file jawaban yang diunggah siswa
+  createdAt   DateTime @default(now())
+
+  @@unique([studentNisn, subjectName, category, semester])
+}
+
+model ExamAttachment {
+  @@map("smk_ExamAttachment")
+  id          String   @id @default(uuid())
+  subjectName String
+  category    String   // UTS, UAS, PAJ
+  semester    String
+  filePath    String   // Path file soal/lampiran yang diunggah guru
+  fileName    String
+  createdAt   DateTime @default(now())
+
+  @@unique([subjectName, category, semester])
+}
+
+model ExamSchedule {
+  @@map("smk_ExamSchedule")
+  id          String   @id @default(uuid())
+  subjectName String
+  category    String   // UTS, UAS, PAJ
+  semester    String
+  startTime   DateTime
+  endTime     DateTime
+  forceOpen   Boolean  @default(false) // Jika true, ujian dipaksa terbuka oleh admin
+  createdAt   DateTime @default(now())
+
+  @@unique([subjectName, category, semester])
+}
+
+model StudentAttendance {
+  @@map("smk_StudentAttendance")
+  id        Int      @id @default(autoincrement())
+  studentId String
+  student   Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  date      String   // Format: YYYY-MM-DD
+  status    String   // HADIR, SAKIT, IZIN, ALFA
+  notes     String?
+  waktuHadir     String?  // Jam riil saat check-in (misal: "06:50")
+  keterlambatan  Int      @default(0) // Menit terlambat, 0 jika tepat waktu
+
+  @@unique([studentId, date])
+}
+
+model TeacherAttendance {
+  @@map("smk_TeacherAttendance")
+  id        Int      @id @default(autoincrement())
+  teacherId String
+  teacher   Teacher  @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  date      String   // Format: YYYY-MM-DD
+  status    String   // HADIR, TUGAS_LUAR, ALFA
+  notes     String?
+  jp        Int      @default(0)
+  waktuHadir     String?  // Jam riil saat check-in
+  keterlambatan  Int      @default(0) // Menit terlambat
+
+  @@unique([teacherId, date])
+}
+
+model TeachingJournal {
+  @@map("smk_TeachingJournal")
+  id                 String              @id @default(uuid())
+  teacherId          String
+  teacher            Teacher             @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  date               String              // Format: YYYY-MM-DD
+  kelas              String              // e.g. "VII", "VIII", "IX"
+  subjectName        String              // e.g. "Bahasa Inggris"
+  jamKe              String              // e.g. "1-2"
+  materi             String              @db.Text
+  tujuanPembelajaran String?             @db.Text
+  catatanAktivitas   String?             @db.Text
+  catatanKarakter    String?             @db.Text // Observasi Profil Pelajar Pancasila
+  createdAt          DateTime            @default(now())
+  attendances        JournalAttendance[]
+  grades             JournalGrade[]
+
+  @@unique([teacherId, date, jamKe])
+}
+
+model JournalAttendance {
+  @@map("smk_JournalAttendance")
+  id         String          @id @default(uuid())
+  journalId  String
+  journal    TeachingJournal @relation(fields: [journalId], references: [id], onDelete: Cascade)
+  studentId  String
+  student    Student         @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  status     String          // HADIR, SAKIT, IZIN, ALFA
+  notes      String?
+
+  @@unique([journalId, studentId])
+}
+
+model JournalGrade {
+  @@map("smk_JournalGrade")
+  id         String          @id @default(uuid())
+  journalId  String
+  journal    TeachingJournal @relation(fields: [journalId], references: [id], onDelete: Cascade)
+  studentId  String
+  student    Student         @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  score      Int             // 0-100
+  notes      String?
+
+  @@unique([journalId, studentId])
+}
+
+model FeeMaster {
+  @@map("smk_FeeMaster")
+  id          String   @id @default(uuid())
+  name        String   @unique
+  nominal     Int
+  tahunAjaran String   @default("2026/2027")
+  unit String @default("SMK") // SMP / SMK
+  status String @default("AKTIF") // AKTIF, LULUS, PINDAH, KELUAR
+  tipe        String   @default("BULANAN") // BULANAN, SEKALI_BAYAR
+}
+
+model StudentPayment {
+  @@map("smk_StudentPayment")
+  id          String   @id @default(uuid())
+  studentNisn String
+  student     Student  @relation(fields: [studentNisn], references: [nisn], onDelete: Cascade)
+  feeName     String   // SPP, Uang Gedung, Seragam, Ujian, dll
+  bulan       String   // "1", "2", ..., "12" atau "-"
+  tahun       String   // "2026", "2027"
+  amount      Int      // Nominal tagihan
+  paidAmount  Int      // Nominal yang dibayar
+  status      String   @default("LUNAS") // LUNAS, CICILAN, BELUM_LUNAS
+  paidAt      String   // YYYY-MM-DD
+  receiptNo   String   @unique
+  createdById String?  @default("")
+  createdAt   DateTime @default(now())
+}
+
+model BosDisbursement {
+  @@map("smk_BosDisbursement")
+  id           String   @id @default(uuid())
+  tahap        String   // Tahap I, Tahap II, Tahap III
+  tahun        String   // 2026
+  amount       Int
+  receivedDate String   // YYYY-MM-DD
+  keterangan   String   @default("")
+  createdAt    DateTime @default(now())
+}
+
+model ExpenseTransaction {
+  @@map("smk_ExpenseTransaction")
+  id          String   @id @default(uuid())
+  source      String   @default("KAS_SWADAYA") // KAS_SWADAYA, KAS_BOS
+  category    String   // PPDB, PERPUSTAKAAN, PEMBELAJARAN, EVALUASI, ATK, DAYA_JASA, SARPRAS, HONOR, KAS_UMUM
+  title       String
+  amount      Int
+  date        String   // YYYY-MM-DD
+  receiptNo   String?  @default("-")
+  proofImage  String?  @default("")
+  createdById String?  @default("")
+  createdAt   DateTime @default(now())
+}
+
+model PayrollRecord {
+  @@map("smk_PayrollRecord")
+  id          String   @id @default(uuid())
+  teacherId   String
+  teacher     Teacher  @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  bulan       String
+  tahun       String
+  honorPokok  Int
+  tunjangan   Int
+  transport   Int
+  insentif    Int
+  totalGaji   Int
+  paidAt      String
+  receiptNo   String   @unique
+  createdAt   DateTime @default(now())
+}
+
+model SchoolLetter {
+  @@map("smk_SchoolLetter")
+  id          String   @id @default(uuid())
+  letterType  String   // SURAT_KETERANGAN_SISWA, SURAT_MASUK, SURAT_KELUAR, SURAT_PINDAH
+  letterNo    String   // Nomor surat resmi: e.g. 042/SMP-AQ/VII/2026
+  title       String   // Perihal / Judul
+  studentNisn String?  @default("")
+  recipient   String?  @default("")
+  sender      String?  @default("")
+  date        String   // YYYY-MM-DD
+  keterangan  String?  @default("")
+  createdById String?  @default("")
+  createdAt   DateTime @default(now())
+}
+
+model LibraryBook {
+  @@map("smk_LibraryBook")
+  id             String     @id @default(uuid())
+  bookCode       String     @unique // Kode ISBN / Rak, e.g. BUK-001
+  title          String
+  author         String     @default("Penulis Umum")
+  publisher      String     @default("Penerbit Utama")
+  category       String     @default("Pelajaran") // Pelajaran, Agama, Fiksi, Referensi
+  type           String     @default("Fisik") // Fisik, Digital
+  coverUrl       String?    @default("") @db.Text // Link gambar sampul
+  fileUrl        String?    @default("") @db.Text // Link Google Drive / file PDF
+  stock          Int        @default(1)
+  availableStock Int        @default(1)
+  location       String     @default("Rak A1")
+  loans          BookLoan[]
+  createdAt      DateTime   @default(now())
+}
+
+model BookLoan {
+  @@map("smk_BookLoan")
+  id          String      @id @default(uuid())
+  bookId      String
+  book        LibraryBook @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  studentNisn String
+  student     Student     @relation(fields: [studentNisn], references: [nisn], onDelete: Cascade)
+  borrowDate  String      // YYYY-MM-DD
+  dueDate     String      // YYYY-MM-DD
+  returnDate  String?     @default("-")
+  status      String      @default("DIPINJAM") // DIPINJAM, DIKEMBALIKAN, TERLAMBAT
+  fine        Int         @default(0)
+  createdAt   DateTime    @default(now())
+}
+
+model InventoryItem {
+  @@map("smk_InventoryItem")
+  id           String   @id @default(uuid())
+  itemCode     String   @unique // Kode Barang: e.g. AST-001
+  name         String   // Nama Aset (misal: Laptop HP Core i5, Proyektor EPSON, Meja Siswa)
+  category     String   @default("Elektronik") // Elektronik, Mebel, Alat Olahraga, Lab, Musik
+  location     String   @default("Ruang Lab Komputer") // Lokasi fisik
+  quantity     Int      @default(1)
+  condition    String   @default("BAIK") // BAIK, RUSAK_RINGAN, RUSAK_BERAT
+  purchaseYear String   @default("2025")
+  keterangan   String?  @default("")
+  createdAt    DateTime @default(now())
+}
+
+model Major {
+  @@map("smk_Major")
+  id        String   @id @default(uuid())
+  code      String   @unique // e.g. "DKV", "TKJ", "AKL"
+  name      String   // e.g. "Desain Komunikasi Visual"
+  unit      String   @default("SMK")
+  createdAt DateTime @default(now())
+}
+
+model KtspDocument {
+  @@map("smk_KtspDocument")
+  id            String   @id @default(uuid())
+  title         String
+  tahunAjaran   String
+  fileUrl       String   @db.Text
+  status        String   @default("DRAFT") // DRAFT, MENUNGGU_PERSETUJUAN, DISETUJUI
+  uploadedBy    String
+  createdAt     DateTime @default(now())
+  approvedAt    DateTime?
+  keterangan    String?  @default("")
+}
+
+model Portfolio {
+  @@map("smk_Portfolio")
+  id          String   @id @default(uuid())
+  judul       String
+  deskripsi   String   @default("")
+  fileUrl     String
+  kategori         String   @default("Karya DKV")
+  studentId        String
+  student          Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  createdAt        DateTime @default(now())
+
+  // Fields Penilaian Rubrik DKV
+  nilaiKreativitas Int?
+  nilaiTeknik      Int?
+  nilaiKesesuaian  Int?
+  catatanGuru      String?
+  dinilaiOleh      String?
+  subjectName      String?
+}
+
+model Assignment {
+  @@map("smk_Assignment")
+  id          String   @id @default(uuid())
+  title       String
+  description String   @db.Text
+  deadline    DateTime
+  type        String   @default("INDIVIDU") // INDIVIDU, KELOMPOK
+  subjectName String
+  kelas       String   @default("") // e.g. "X TKJ 1", "Semua Kelas"
+  unit        String   @default("SMK")
+  teacherId   String
+  teacher     Teacher  @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+
+  submissions AssignmentSubmission[]
+  groups      AssignmentGroup[]
+}
+
+model AssignmentGroup {
+  @@map("smk_AssignmentGroup")
+  id           String   @id @default(uuid())
+  assignmentId String
+  assignment   Assignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  groupName    String   // e.g. "Kelompok 1"
+  
+  members      AssignmentGroupMember[]
+  submissions  AssignmentSubmission[]
+}
+
+model AssignmentGroupMember {
+  @@map("smk_AssignmentGroupMember")
+  id           String   @id @default(uuid())
+  groupId      String
+  group        AssignmentGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  studentNisn  String
+  student      Student  @relation(fields: [studentNisn], references: [nisn], onDelete: Cascade)
+  
+  @@unique([groupId, studentNisn])
+}
+
+model AssignmentSubmission {
+  @@map("smk_AssignmentSubmission")
+  id           String   @id @default(uuid())
+  assignmentId String
+  assignment   Assignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  
+  studentNisn  String?  
+  student      Student? @relation(fields: [studentNisn], references: [nisn], onDelete: Cascade)
+  
+  groupId      String?
+  group        AssignmentGroup? @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  fileUrl      String?  @db.Text
+  textContent  String?  @db.Text
+  score        Int?
+  feedback     String?  @db.Text
+  submittedAt  DateTime @default(now())
+}
+
+// === PKL MODULE ===
+
+model PklDudi {
+  @@map("smk_PklDudi")
+  id          String   @id @default(uuid())
+  name        String   
+  address     String   @db.Text
+  field       String   @default("") 
+  leaderName  String   @default("") 
+  mentorName  String   @default("")
+  signature   String?  @default("") 
+  quota       Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  placements  PklPlacement[]
+}
+
+model PklPlacement {
+  @@map("smk_PklPlacement")
+  id             String   @id @default(uuid())
+  studentNisn    String   @unique
+  student        Student  @relation(fields: [studentNisn], references: [nisn], onDelete: Cascade)
+  dudiId         String
+  dudi           PklDudi  @relation(fields: [dudiId], references: [id], onDelete: Cascade)
+  teacherId      String   
+  startDate      DateTime
+  endDate        DateTime
+  status         String   @default("AKTIF") 
+  createdAt      DateTime @default(now())
+
+  journals       PklJournal[]
+  grade          PklGrade?
+}
+
+model PklJournal {
+  @@map("smk_PklJournal")
+  id             String       @id @default(uuid())
+  placementId    String
+  placement      PklPlacement @relation(fields: [placementId], references: [id], onDelete: Cascade)
+  date           String       
+  activity       String       @db.Text
+  imagePath      String?      
+  status         String       @default("PENDING") 
+  feedback       String?      @db.Text 
+  createdAt      DateTime     @default(now())
+}
+
+model PklGrade {
+  @@map("smk_PklGrade")
+  id             String       @id @default(uuid())
+  placementId    String       @unique
+  placement      PklPlacement @relation(fields: [placementId], references: [id], onDelete: Cascade)
+  teknisScore    Int          @default(0) 
+  nonTeknisScore Int          @default(0) 
+  schoolScore    Int          @default(0) 
+  finalScore     Int          @default(0)
+  notes          String?      @db.Text
+  createdAt      DateTime     @default(now())
+}
+
+
+// === UKK MODULE ===
+
+model Assessor {
+  @@map("smk_Assessor")
+  id          String   @id @default(uuid())
+  name        String
+  username    String   @unique
+  password    String
+  company     String   @default("")
+  signature    String?   @default("")
+  createdAt   DateTime @default(now())
+
+  exams       UkkExam[]
+  scores      UkkScore[]
+}
+
+model UkkScheme {
+  @@map("smk_UkkScheme")
+  id          String   @id @default(uuid())
+  title       String
+  jurusan     String
+  description String   @db.Text
+  createdAt   DateTime @default(now())
+
+  components  UkkComponent[]
+  exams       UkkExam[]
+}
+
+model UkkComponent {
+  @@map("smk_UkkComponent")
+  id          String    @id @default(uuid())
+  schemeId    String
+  scheme      UkkScheme @relation(fields: [schemeId], references: [id], onDelete: Cascade)
+  name        String    
+  weight      Int       
+  criteria    String    @db.Text 
+  order       Int       @default(0)
+
+  scores      UkkScore[]
+}
+
+model UkkExam {
+  @@map("smk_UkkExam")
+  id             String    @id @default(uuid())
+  schemeId       String
+  scheme         UkkScheme @relation(fields: [schemeId], references: [id], onDelete: Cascade)
+  studentNisn    String
+  student        Student   @relation(fields: [studentNisn], references: [nisn], onDelete: Cascade)
+  assessorId     String?
+  assessor       Assessor? @relation(fields: [assessorId], references: [id], onDelete: SetNull)
+  teacherId      String?   
+  examDate       DateTime
+  status         String    @default("TERJADWAL") 
+  finalScore     Int       @default(0)
+  predikat       String    @default("") 
+  createdAt      DateTime  @default(now())
+
+  scores         UkkScore[]
+}
+
+model UkkScore {
+  @@map("smk_UkkScore")
+  id             String       @id @default(uuid())
+  examId         String
+  exam           UkkExam      @relation(fields: [examId], references: [id], onDelete: Cascade)
+  componentId    String
+  component      UkkComponent @relation(fields: [componentId], references: [id], onDelete: Cascade)
+  assessorId     String?      
+  assessor       Assessor?    @relation(fields: [assessorId], references: [id], onDelete: SetNull)
+  predicateValue String       
+  score          Int          
+  notes          String?      @db.Text
+  createdAt      DateTime     @default(now())
+
+  @@unique([examId, componentId])
+}
+
+
+// === SPPD MODULE ===
+
+model Sppd {
+  @@map("smk_Sppd")
+  id            String   @id @default(uuid())
+  nomorSurat    String   @default("")
+  teacherId     String
+  teacher       Teacher  @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  keperluan     String   @db.Text
+  tujuan        String
+  tanggalBerangkat DateTime
+  tanggalKembali   DateTime
+  transportasi  String   @default("Kendaraan Pribadi")
+  status        String   @default("MENUNGGU") // MENUNGGU | DISETUJUI | DITOLAK
+  catatanKepsek String?  @db.Text
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model TracerStudy {
+  @@map("smk_TracerStudy")
+  id          String   @id @default(uuid())
+  studentNisn String   @unique
+  student     Student  @relation(fields: [studentNisn], references: [nisn], onDelete: Cascade)
+  status      String   // KULIAH, BEKERJA, WIRAUSAHA, MENCARI_KERJA
+  instansi    String   @default("") // Nama Kampus / Nama Perusahaan
+  jabatan     String   @default("") // Jurusan / Posisi
+  tahunLulus  String   @default("")
+  createdAt   DateTime @default(now())
+}
+
