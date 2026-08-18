@@ -12,7 +12,7 @@ export async function getKepsekDashboard() {
     }
 
     const school = await prisma.school.findFirst({ where: { id: 1 } }) || {
-      nama: "SEKOLAH MENENGAH PERTAMA (SMP) AL QODIRIYAH WINDUSARI",
+      nama: "SEKOLAH MENENGAH PERTAMA (SMP) MASTER DEMO KOTA DEMO",
       logo: "🏫",
       tahunAjaran: "2026/2027",
       semester: "Ganjil"

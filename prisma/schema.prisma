@@ -12,9 +12,9 @@ datasource db {
 model School {
   @@map("smk_School")
   id           Int      @id @default(1)
-  nama         String   @default("SEKOLAH MENENGAH KEJURUAN (SMK) AL QODIRIYAH WINDUSARI")
+  nama         String   @default("SEKOLAH MENENGAH KEJURUAN (SMK) MASTER DEMO KOTA DEMO")
   npsn         String   @default("69901347")
-  alamat       String   @default("Jegedeh Wahyurejo, Candisari, Windusari, Magelang")
+  alamat       String   @default("Jegedeh Wahyurejo, Candisari, Kota Demo, Magelang")
   logo         String   @default("🏫")
   kepsek       String   @default("KH. Ahmad Qodir, M.Pd.I.")
   kepsekNip    String   @default("197508172005011002")
@@ -30,7 +30,7 @@ model School {
   utsMode      String   @default("online")
   uasMode      String   @default("offline")
   pajMode      String   @default("offline")
-  yayasan      String   @default("YAYASAN AL QODIRIYAH HASAN IBRAHIM")
+  yayasan      String   @default("YAYASAN MASTER DEMO HASAN IBRAHIM")
   skIjin       String   @default("188.4/61081/20.2b/2015")
   nss          String   @default("202030816051")
   telepon      String   @default("085228476578, 08587399500")
@@ -42,19 +42,19 @@ model School {
 
   // Konten Halaman Beranda (Home)
   heroTitle      String   @default("Membentuk Generasi Berakhlak & Berprestasi")
-  heroSubtitle   String   @default("SMP Master Demo Windusari memadukan keunggulan akademis dengan pembinaan akhlak mulia dan karakter Islami untuk mempersiapkan masa depan putra-putri Anda.")
-  sambutanTitle  String   @default("Selamat Datang di SMP Master Demo Windusari")
+  heroSubtitle   String   @default("SMP Master Demo Kota Demo memadukan keunggulan akademis dengan pembinaan akhlak mulia dan karakter Islami untuk mempersiapkan masa depan putra-putri Anda.")
+  sambutanTitle  String   @default("Selamat Datang di SMP Master Demo Kota Demo")
   sambutanText   String   @default("Pendidikan bukanlah sekadar mengisi wadah yang kosong, melainkan menyalakan api karakter dan ilmu. Di SMP Master Demo, kami berkomitmen untuk melahirkan insan-insan cerdas yang tidak hanya unggul secara akademis, namun juga memiliki kedalaman akhlak yang berlandaskan nilai-nilai Al-Qur'an dan Sunnah.")
   sambutanAuthor String   @default("Fajar Nur Aktorika D.S, S.Pd.Si, M.Pd.")
 
   // Konten Halaman Profil
   sejarahTitle   String   @default("Perjalanan SMP Master Demo")
-  sejarahText    String   @default("SMP Master Demo Windusari didirikan dengan cita-cita luhur untuk menyediakan sarana pendidikan tingkat menengah yang berkualitas, terjangkau, dan sarat akan pembinaan moral keagamaan bagi masyarakat di kawasan lereng Gunung Sumbing, Windusari, Magelang.\n\nBermula dari sebuah gagasan para tokoh agama dan masyarakat setempat, sekolah ini secara resmi mulai beroperasi pada tahun 2012 di bawah naungan Yayasan Master Demo. Dengan tekad yang kuat, sarana dan prasarana belajar terus dikembangkan secara bertahap hingga menjadi seperti sekarang ini.\n\nHingga kini, SMP Master Demo telah meluluskan ratusan alumni yang telah berkiprah di berbagai jenjang pendidikan lanjutan, baik sekolah menengah atas favorit, pondok pesantren, maupun dunia kerja profesional, dengan tetap memegang teguh karakter luhur Islami yang diajarkan selama masa sekolah.")
+  sejarahText    String   @default("SMP Master Demo Kota Demo didirikan dengan cita-cita luhur untuk menyediakan sarana pendidikan tingkat menengah yang berkualitas, terjangkau, dan sarat akan pembinaan moral keagamaan bagi masyarakat di kawasan lereng Gunung Sumbing, Kota Demo, Magelang.\n\nBermula dari sebuah gagasan para tokoh agama dan masyarakat setempat, sekolah ini secara resmi mulai beroperasi pada tahun 2012 di bawah naungan Yayasan Master Demo. Dengan tekad yang kuat, sarana dan prasarana belajar terus dikembangkan secara bertahap hingga menjadi seperti sekarang ini.\n\nHingga kini, SMP Master Demo telah meluluskan ratusan alumni yang telah berkiprah di berbagai jenjang pendidikan lanjutan, baik sekolah menengah atas favorit, pondok pesantren, maupun dunia kerja profesional, dengan tetap memegang teguh karakter luhur Islami yang diajarkan selama masa sekolah.")
   visiText       String   @default("Terwujudnya insan yang bertakwa, berakhlak mulia, berprestasi tinggi, menguasai ilmu pengetahuan teknologi, dan berwawasan lingkungan.")
   misiText       String   @default("Menyelenggarakan proses pembelajaran yang mengintegrasikan nilai-nilai Islam dengan kurikulum nasional.;Membina karakter siswa melalui pembiasaan ibadah, budi pekerti, dan kepemimpinan Islami.;Mengembangkan potensi akademik dan non-akademik siswa secara maksimal melalui bimbingan intensif dan ekstrakurikuler.;Menyediakan sarana prasarana penunjang pembelajaran yang memadai berbasis teknologi informasi.;Mewujudkan lingkungan sekolah yang bersih, sehat, ramah anak, dan peduli terhadap kelestarian alam.")
 
   // Konten Halaman Akademik
-  akademikText   String   @default("SMP Master Demo Windusari menerapkan Kurikulum Merdeka yang dikolaborasikan secara dinamis dengan kurikulum pesantren. Hal ini bertujuan untuk menyeimbangkan pencapaian kompetensi global dengan pembentukan akhlakul karimah yang tangguh.")
+  akademikText   String   @default("SMP Master Demo Kota Demo menerapkan Kurikulum Merdeka yang dikolaborasikan secara dinamis dengan kurikulum pesantren. Hal ini bertujuan untuk menyeimbangkan pencapaian kompetensi global dengan pembentukan akhlakul karimah yang tangguh.")
   kurikulumDetail String  @default("Kurikulum Merdeka & Bimbingan Kepesantrenan")
   jamBelajar      String  @default("Senin - Sabtu, Jam 07:00 - 13:30 WIB")
   kriteriaLulus   String  @default("Kehadiran minimal 90%, Menyelesaikan seluruh program pembelajaran, Berkelakuan baik dengan nilai kepribadian minimal Baik, Mengikuti ujian sekolah tulis dan praktik.")
@@ -63,7 +63,7 @@ model School {
   galeriImages    String   @default("/hero_school.jpg;/facility_computer.jpg;/extracurricular_scout.jpg;/news_silat.jpg;/news_ramadhan.jpg;/principal_headmaster.jpg")
 
   // Konten Halaman Kontak
-  googleMapsUrl   String   @default("https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15822.428766153664!2d110.15555416279612!3d-7.447814234509172!2m3!1f0!2f0!3f0!3m2!1i1024|2i768!4f13.1!3m3!1m2!1s0x2e7a89279a07153b%3A0xe54bb3f0ba2b528a!2sWahyurejo%2C%20Candisari%2C%20Windusari%2C%20Magelang%2C%20Central%20Java!5e0!3m2!1sen!2sid!4v1720260000000!5m2!1sen!2sid")
+  googleMapsUrl   String   @default("https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15822.428766153664!2d110.15555416279612!3d-7.447814234509172!2m3!1f0!2f0!3f0!3m2!1i1024|2i768!4f13.1!3m3!1m2!1s0x2e7a89279a07153b%3A0xe54bb3f0ba2b528a!2sWahyurejo%2C%20Candisari%2C%20Kota Demo%2C%20Magelang%2C%20Central%20Java!5e0!3m2!1sen!2sid!4v1720260000000!5m2!1sen!2sid")
   jamPelayanan    String   @default("Senin - Sabtu: 07:30 - 14:00 WIB")
   schoolIp        String?
   batasJamHadirSiswa String @default("07:00") // Toleransi jam masuk siswa

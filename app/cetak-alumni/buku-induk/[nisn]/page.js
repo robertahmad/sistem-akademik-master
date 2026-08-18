@@ -77,7 +77,7 @@ export default async function CetakBukuInduk({ params }) {
               <p style={{ margin: "5px 0 0 0", fontSize: "9pt", color: "#444" }}>Scan untuk verifikasi</p>
             </div>
             <div style={{ textAlign: "center", width: "300px" }}>
-              <p style={{ margin: "0 0 4rem 0" }}>Windusari, ..............................<br/>Kepala Sekolah,</p>
+              <p style={{ margin: "0 0 4rem 0" }}>Kota Demo, ..............................<br/>Kepala Sekolah,</p>
               <p style={{ margin: 0, fontWeight: "bold", textDecoration: "underline" }}>{school?.kepalaSekolah || "___________________"}</p>
               <p style={{ margin: 0 }}>NIP. {school?.nipKepsek || "-"}</p>
             </div>

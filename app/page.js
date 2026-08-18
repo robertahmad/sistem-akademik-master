@@ -349,10 +349,10 @@ export default function Home() {
 
         <nav className="hero-navbar">
           <div className="nav-logo">
-            <img src="/logo-smk-trans-v4.png" alt="Logo SMK" />
+            <img src="/logo-generic.svg" alt="Logo SMK" />
             <div className="nav-logo-text">
               <p className="smp">SEKOLAH MASTER DEMO</p>
-              <p className="al-mumtaz">WINDUSARI</p>
+              <p className="al-mumtaz">KOTA DEMO</p>
             </div>
           </div>
           
@@ -370,12 +370,12 @@ export default function Home() {
         </nav>
 
         <div className="hero-center">
-          <img src="/logo-smk-trans-v4.png" alt="Logo Tengah" className="logo-center" />
-          <div className="badge-generasi">GENERASI AL-QODIRIYAH</div>
+          <img src="/logo-generic.svg" alt="Logo Tengah" className="logo-center" />
+          <div className="badge-generasi">GENERASI MASTER DEMO</div>
           
           <h1 className="title-huge">
             <span className="white">SEKOLAH MASTER DEMO</span>
-            <span className="gold">WINDUSARI</span>
+            <span className="gold">KOTA DEMO</span>
           </h1>
           <div className="title-sub">YAYASAN EDUKASI MASTER</div>
 
@@ -395,7 +395,7 @@ export default function Home() {
       <section className="section section-white">
         <div className="container welcome-speech">
           <div className="principal-photo-wrapper">
-            <img src={school?.logo && school.logo.startsWith("data:image/") ? school.logo : "/logo-smk-trans-v4.png"} alt="Logo Sekolah" className="principal-photo" style={{ objectFit: "contain", padding: "1.5rem" }} />
+            <img src={school?.logo && school.logo.startsWith("data:image/") ? school.logo : "/logo-generic.svg"} alt="Logo Sekolah" className="principal-photo" style={{ objectFit: "contain", padding: "1.5rem" }} />
           </div>
           <div className="speech-content">
             <span style={{ fontWeight: 700, color: "var(--secondary)", textTransform: "uppercase", fontSize: "0.85rem", letterSpacing: "0.05em" }}>

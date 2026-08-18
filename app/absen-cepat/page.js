@@ -229,7 +229,7 @@ export default function AbsenCepatPage() {
     };
   }, [scanMode, status]); // Rebind scanner when status changes to capture updated status value inside closure!
 
-  const logoSrc = (school?.logo && school.logo !== "🏫" && school.logo !== "") ? school.logo : "/logo-smk.png";
+  const logoSrc = (school?.logo && school.logo !== "🏫" && school.logo !== "") ? school.logo : "/logo-generic.svg";
 
   return (
     <div style={{

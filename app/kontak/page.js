@@ -79,7 +79,7 @@ export default function Kontak() {
                     <div className="contact-detail-icon">📍</div>
                     <div>
                       <div className="contact-detail-label">Alamat Sekolah</div>
-                      <div className="contact-detail-value">{school?.alamat || "Jl. Windusari-Seloboro No. 15, Kec. Windusari, Kab. Magelang, Jawa Tengah 56152"}</div>
+                      <div className="contact-detail-value">{school?.alamat || "Jl. Kota Demo-Seloboro No. 15, Kec. Kota Demo, Kab. Magelang, Jawa Tengah 56152"}</div>
                     </div>
                   </div>
 
@@ -200,7 +200,7 @@ export default function Kontak() {
           <div className="map-container">
             <iframe 
               className="map-iframe"
-              src={school?.googleMapsUrl || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15835.303318536814!2d110.141527!3d-7.373461!2m3!1f0!2f0!3f0!3m2!1i1024|2i768!4f13.1!3m3!1m2!1s0x2e7a8f15ab9e088d%3A0xe5a3f120e2ef6cd3!2sWindusari%2C%20Kec.%20Windusari%2C%20Kabupaten%20Magelang%2C%20Jawa%20Tengah!5e0!3m2!1sid!2sid!4v1782888000000!5m2!1sid!2sid"} 
+              src={school?.googleMapsUrl || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15835.303318536814!2d110.141527!3d-7.373461!2m3!1f0!2f0!3f0!3m2!1i1024|2i768!4f13.1!3m3!1m2!1s0x2e7a8f15ab9e088d%3A0xe5a3f120e2ef6cd3!2sKota Demo%2C%20Kec.%20Kota Demo%2C%20Kabupaten%20Magelang%2C%20Jawa%20Tengah!5e0!3m2!1sid!2sid!4v1782888000000!5m2!1sid!2sid"} 
               allowFullScreen="" 
               loading="lazy" 
               referrerPolicy="no-referrer-when-downgrade"

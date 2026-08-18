@@ -46,7 +46,7 @@ export default async function Profil() {
               {school?.sejarahTitle || "Perjalanan Sekolah Master Demo"}
             </h2>
             <div style={{ whiteSpace: "pre-line", fontSize: "0.95rem", color: "var(--text-main)", lineHeight: 1.7 }}>
-              {school?.sejarahText || `Sekolah Master Demo didirikan dengan cita-cita luhur untuk menyediakan sarana pendidikan tingkat menengah yang berkualitas, terjangkau, dan sarat akan pembinaan moral keagamaan bagi masyarakat di kawasan lereng Gunung Sumbing, Windusari, Magelang.
+              {school?.sejarahText || `Sekolah Master Demo didirikan dengan cita-cita luhur untuk menyediakan sarana pendidikan tingkat menengah yang berkualitas, terjangkau, dan sarat akan pembinaan moral keagamaan bagi masyarakat di kawasan lereng Gunung Sumbing, Kota Demo, Magelang.
 
 Bermula dari sebuah gagasan para tokoh agama dan masyarakat setempat, sekolah ini secara resmi mulai beroperasi pada tahun 2012 di bawah naungan Yayasan Master Demo. Dengan tekad yang kuat, sarana dan prasarana belajar terus dikembangkan secara bertahap hingga menjadi seperti sekarang ini.
 

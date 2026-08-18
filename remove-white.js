@@ -1,6 +1,6 @@
 const Jimp = require('jimp');
 
-Jimp.read('public/logo-smk.png')
+Jimp.read('public/logo-generic.svg')
   .then(image => {
     // We will do a simple color distance from white
     image.scan(0, 0, image.bitmap.width, image.bitmap.height, function (x, y, idx) {
@@ -20,7 +20,7 @@ Jimp.read('public/logo-smk.png')
         this.bitmap.data[idx + 3] = alpha;
       }
     });
-    return image.write('public/logo-smk-transparent.png');
+    return image.write('public/logo-generic.svg');
   })
   .then(() => {
     console.log('Image saved with aggressive white removal.');

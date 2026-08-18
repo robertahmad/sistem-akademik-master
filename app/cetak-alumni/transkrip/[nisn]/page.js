@@ -19,7 +19,7 @@ export default async function CetakTranskrip({ params }) {
   const domain = "https://smk.alqodiriyah.sch.id"; 
   const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(`${domain}/verifikasi?nisn=${nisn}&doc=transkrip`)}`;
 
-  let logoUrl = "/logo-smk.png";
+  let logoUrl = "/logo-generic.svg";
   if (school?.logo && school.logo.length > 5 && (school.logo.startsWith("http") || school.logo.startsWith("data:") || school.logo.startsWith("/"))) {
     logoUrl = school.logo;
   }
@@ -150,7 +150,7 @@ export default async function CetakTranskrip({ params }) {
               <p style={{ margin: "5px 0 0 0", fontSize: "8pt", color: "#666", maxWidth: "150px" }}>* Dokumen ini sah secara digital.</p>
             </div>
             <div style={{ textAlign: "center", width: "250px" }}>
-              <p style={{ margin: "0 0 4rem 0" }}>Windusari, ..............................<br/>Kepala Sekolah,</p>
+              <p style={{ margin: "0 0 4rem 0" }}>Kota Demo, ..............................<br/>Kepala Sekolah,</p>
               <p style={{ margin: 0, fontWeight: "bold", textDecoration: "underline" }}>{school?.kepalaSekolah || "___________________"}</p>
               <p style={{ margin: 0 }}>NIP. {school?.nipKepsek || "-"}</p>
             </div>

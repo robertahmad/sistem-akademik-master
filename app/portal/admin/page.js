@@ -57,16 +57,16 @@ export default function PortalAdmin() {
 
   // Dashboard Data
   const [school, setSchool] = useState({
-    nama: "SMP & SMK AL QODIRIYAH WINDUSARI (TERPADU)",
+    nama: "SMP & SMK MASTER DEMO KOTA DEMO (TERPADU)",
     npsn: "69901347",
-    alamat: "Jegedeh Wahyurejo, Candisari, Windusari, Magelang",
+    alamat: "Jegedeh Wahyurejo, Candisari, Kota Demo, Magelang",
     logo: "🏫",
     kepsek: "KH. Ahmad Qodir, M.Pd.I.",
     kepsekNip: "197508172005011002",
     semester: "Ganjil",
     tahunAjaran: "2026/2027",
     tanggalCetak: "4 Juli 2026",
-    yayasan: "YAYASAN AL QODIRIYAH HASAN IBRAHIM",
+    yayasan: "YAYASAN MASTER DEMO HASAN IBRAHIM",
     skIjin: "188.4/61081/20.2b/2015",
     nss: "202030816051",
     telepon: "085228476578, 08587399500",
@@ -880,7 +880,7 @@ export default function PortalAdmin() {
       ["Nama Lengkap", "NIS", "NISN", "Jenis Kelamin", "Tempat Lahir", "Tanggal Lahir (YYYY-MM-DD)", "Nama Orang Tua / Wali", "Nama Ayah", "Nama Ibu", "Pekerjaan Ayah", "Pekerjaan Ibu", "Asal Sekolah", "Tanggal Masuk Sekolah (YYYY-MM-DD)", "Kelas", "Alamat Siswa", "Username Login", "Password"]
     ];
     const sampleData = [
-      ["Rani Wijaya", "24001", "0081234567", "Perempuan", "Magelang", "2011-05-12", "Slamet Wijaya", "Slamet Wijaya", "Sumarni", "Wiraswasta", "Ibu Rumah Tangga", "SD N 1 Windusari", "2024-07-15", "X DKV", "Dusun Ngablak RT 02", "rani", "123"],
+      ["Rani Wijaya", "24001", "0081234567", "Perempuan", "Magelang", "2011-05-12", "Slamet Wijaya", "Slamet Wijaya", "Sumarni", "Wiraswasta", "Ibu Rumah Tangga", "SD N 1 Kota Demo", "2024-07-15", "X DKV", "Dusun Ngablak RT 02", "rani", "123"],
       ["Diki Hermawan", "24002", "0087654321", "Laki-laki", "Magelang", "2011-08-20", "Budi Hermawan", "Budi Hermawan", "Siti Aminah", "Petani", "Petani", "MI Master Demo", "2024-07-15", "XI DKV", "Dusun Ngabean RT 03", "diki", "123"]
     ];
 
@@ -2467,7 +2467,7 @@ export default function PortalAdmin() {
                               <input 
                                 type="text" 
                                 className="form-input" 
-                                placeholder="Contoh: SD N 1 Windusari"
+                                placeholder="Contoh: SD N 1 Kota Demo"
                                 value={newSiswa.asalSekolah}
                                 onChange={(e) => setNewSiswa(prev => ({ ...prev, asalSekolah: e.target.value }))}
                                 required 

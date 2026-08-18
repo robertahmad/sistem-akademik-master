@@ -21,7 +21,7 @@ export const viewport = {
 
 export default async function RootLayout({ children }) {
   const profileRes = await getSchoolProfilePublic();
-  const logo = profileRes?.success && profileRes.school?.logo ? profileRes.school.logo : "/logo-smk.png";
+  const logo = profileRes?.success && profileRes.school?.logo ? profileRes.school.logo : "/logo-generic.svg";
 
   return (
     <html lang="id">

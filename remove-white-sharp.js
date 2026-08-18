@@ -2,7 +2,7 @@ const sharp = require('sharp');
 
 async function removeWhite() {
   try {
-    const { data, info } = await sharp('public/logo-smk.png')
+    const { data, info } = await sharp('public/logo-generic.svg')
       .raw()
       .toBuffer({ resolveWithObject: true });
 
@@ -62,9 +62,9 @@ async function removeWhite() {
       }
     })
     .png()
-    .toFile('public/logo-smk-trans-v3.png');
+    .toFile('public/logo-generic.svg');
 
-    console.log('Successfully created logo-smk-trans-v3.png with Sharp!');
+    console.log('Successfully created logo-generic.svg with Sharp!');
   } catch (err) {
     console.error(err);
   }

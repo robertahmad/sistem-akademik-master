@@ -16,8 +16,8 @@ export default function Footer() {
     loadSchool();
   }, []);
 
-  const schoolName = school?.nama || "SEKOLAH MASTER DEMO WINDUSARI";
-  const schoolAddress = school?.alamat || "Jegedeh Wahyurejo, Candisari, Windusari, Magelang";
+  const schoolName = school?.nama || "SEKOLAH MASTER DEMO KOTA DEMO";
+  const schoolAddress = school?.alamat || "Jegedeh Wahyurejo, Candisari, Kota Demo, Magelang";
   const schoolPhone = school?.telepon || "085228476578, 08587399500";
   const schoolEmail = school?.email || "smpalqodiriyah@gmail.com";
 
@@ -26,7 +26,7 @@ export default function Footer() {
       <div className="container footer-grid">
         <div className="footer-info">
           <div className="logo-wrapper" style={{ marginBottom: "1rem" }}>
-            <img src="/logo-smk.png" alt="Logo Sekolah Master Demo" className="logo-icon" style={{ objectFit: "contain", padding: "0.2rem", backgroundColor: "white" }} />
+            <img src="/logo-generic.svg" alt="Logo Sekolah Master Demo" className="logo-icon" style={{ objectFit: "contain", padding: "0.2rem", backgroundColor: "white" }} />
             <div className="logo-text">
               <span className="logo-title" style={{ color: "white" }}>SEKOLAH MASTER DEMO</span>
               <span className="logo-subtitle" style={{ color: "var(--text-muted-light)" }}>Magelang Jawa Tengah</span>

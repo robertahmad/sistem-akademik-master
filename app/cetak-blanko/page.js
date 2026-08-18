@@ -5,7 +5,7 @@ export default async function CetakBlanko() {
   const school = await prisma.school.findFirst();
   const textStr = "SEKOLAH MASTER DEMO";
 
-  let logoUrl = "/logo-smk.png";
+  let logoUrl = "/logo-generic.svg";
   if (school?.logo && school.logo.length > 5) {
     if (school.logo.startsWith("http") || school.logo.startsWith("data:")) {
       logoUrl = school.logo;

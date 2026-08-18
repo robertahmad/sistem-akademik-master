@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function Header({ logo = "/logo-smk.png" }) {
+export default function Header({ logo = "/logo-generic.svg" }) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
@@ -41,8 +41,8 @@ export default function Header({ logo = "/logo-smk.png" }) {
         <Link href="/" className="logo-wrapper" onClick={closeMenu}>
           <img src={logo} alt="Logo Sekolah Master Demo" style={{ width: "3.2rem", height: "3.2rem", objectFit: "contain", flexShrink: 0 }} />
           <div className="logo-text">
-            <span className="logo-title">SMK AL QODIRIYAH</span>
-            <span className="logo-subtitle">Windusari</span>
+            <span className="logo-title">SMK MASTER DEMO</span>
+            <span className="logo-subtitle">Kota Demo</span>
           </div>
         </Link>
         

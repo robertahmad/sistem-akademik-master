@@ -9,7 +9,7 @@ export default function UkkCertificateModal({ exam, school, onClose }) {
   const [downloading, setDownloading] = useState(false);
   const baseUrl = typeof window !== "undefined" ? window.location.origin : "";
   const verifyUrl = `${baseUrl}/verify/ukk/${exam.id}`;
-  const logoSrc = (school?.logo && school.logo !== "??" && school.logo !== "") ? school.logo : "/logo-smk.png";
+  const logoSrc = (school?.logo && school.logo !== "??" && school.logo !== "") ? school.logo : "/logo-generic.svg";
 
   const handleDownloadPDF = async () => {
     if (!certRef.current) return;
@@ -62,7 +62,7 @@ export default function UkkCertificateModal({ exam, school, onClose }) {
                  <div style={{ position: "absolute", bottom: 0, right: 0, width: "200px", height: "200px", background: "#f1f5f9", clipPath: "polygon(100% 100%, 0 100%, 100% 0)", zIndex: 1 }} />
                  
                  {/* Latar Belakang Teks Watermark Berulang (Padat) */}
-                 <div style={{ position: "absolute", top: "-50%", left: "-50%", width: "200%", height: "200%", backgroundImage: `url("data:image/svg+xml,%3Csvg width='410' height='30' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='0' y='22' font-family='Times New Roman, serif' font-size='24' font-weight='bold' fill='rgba(0,0,0,0.03)'%3ESEKOLAH MASTER DEMO WINDUSARI%26%23160%3B%26%23160%3B%3C/text%3E%3C/svg%3E")`, backgroundRepeat: "repeat", transform: "rotate(-35deg)", pointerEvents: "none", zIndex: 1 }} />
+                 <div style={{ position: "absolute", top: "-50%", left: "-50%", width: "200%", height: "200%", backgroundImage: `url("data:image/svg+xml,%3Csvg width='410' height='30' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='0' y='22' font-family='Times New Roman, serif' font-size='24' font-weight='bold' fill='rgba(0,0,0,0.03)'%3ESEKOLAH MASTER DEMO KOTA DEMO%26%23160%3B%26%23160%3B%3C/text%3E%3C/svg%3E")`, backgroundRepeat: "repeat", transform: "rotate(-35deg)", pointerEvents: "none", zIndex: 1 }} />
                  
                  {/* Watermark Logo */}
                  <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "450px", height: "450px", backgroundImage: `url('${logoSrc}')`, backgroundRepeat: "no-repeat", backgroundPosition: "center", backgroundSize: "contain", opacity: 0.05, pointerEvents: "none", zIndex: 2 }} />

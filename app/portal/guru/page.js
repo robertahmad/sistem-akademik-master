@@ -728,7 +728,7 @@ export default function PortalGuru() {
         <div class="header" style="display:flex;align-items:center;justify-content:center;border-bottom:2px double #111;padding-bottom:8px;margin-bottom:12px">
           ${school?.logo && (school.logo.startsWith("data:") || school.logo.startsWith("http") || school.logo.startsWith("/")) ? `<img src="${school.logo}" alt="Logo" style="height:45px;width:45px;object-fit:contain;margin-right:12px" />` : `<div style="font-size:28px;margin-right:10px">${school?.logo || '🏫'}</div>`}
           <div style="flex:1; text-align:center">
-            <div style="font-size:14px; font-weight:bold">${school?.yayasan || "YAYASAN AL-QODIRIYAH"}</div>
+            <div style="font-size:14px; font-weight:bold">${school?.yayasan || "YAYASAN MASTER DEMO"}</div>
             <div style="font-size:16px; font-weight:bold">${school?.nama || "SEKOLAH MASTER DEMO"}</div>
             <div style="font-size:10px">${school?.alamat || ""} | Telp: ${school?.telepon || ""}</div>
           </div>
@@ -778,7 +778,7 @@ export default function PortalGuru() {
         <div class="header" style="display:flex;align-items:center;justify-content:center;border-bottom:2px double #111;padding-bottom:8px;margin-bottom:12px">
           ${school?.logo && (school.logo.startsWith("data:") || school.logo.startsWith("http") || school.logo.startsWith("/")) ? `<img src="${school.logo}" alt="Logo" style="height:45px;width:45px;object-fit:contain;margin-right:12px" />` : `<div style="font-size:28px;margin-right:10px">${school?.logo || '🏫'}</div>`}
           <div style="flex:1; text-align:center">
-            <div style="font-size:14px; font-weight:bold">${school?.yayasan || "YAYASAN AL-QODIRIYAH"}</div>
+            <div style="font-size:14px; font-weight:bold">${school?.yayasan || "YAYASAN MASTER DEMO"}</div>
             <div style="font-size:16px; font-weight:bold">${school?.nama || "SEKOLAH MASTER DEMO"}</div>
             <div style="font-size:10px">${school?.alamat || ""}</div>
           </div>
@@ -2483,7 +2483,7 @@ export default function PortalGuru() {
     const origin = window.location.origin;
     
     // Perbaiki logoPath: tangani URL http, URL relatif (/uploads/...), dan base64
-    let logoPath = `${origin}/logo-smk.png`; // fallback default
+    let logoPath = `${origin}/logo-generic.svg`; // fallback default
     if (school && school.logo && school.logo.trim() !== "" && school.logo !== "🏫") {
       if (school.logo.startsWith("http") || school.logo.startsWith("data:")) {
         logoPath = school.logo;
@@ -2498,7 +2498,7 @@ export default function PortalGuru() {
       ? `${selectedStudent.name} / ${selectedStudent.nisn}`
       : "Rapor Sekolah Master Demo";
 
-    const wmText = `<svg xmlns='http://www.w3.org/2000/svg' width='410' height='120'><text x='5' y='55' font-family='Times New Roman,serif' font-size='18' font-weight='bold' fill='rgba(0,0,0,0.045)' transform='rotate(-30,205,60)'>SEKOLAH MASTER DEMO WINDUSARI</text><text x='5' y='105' font-family='Times New Roman,serif' font-size='18' font-weight='bold' fill='rgba(0,0,0,0.045)' transform='rotate(-30,205,110)'>SEKOLAH MASTER DEMO WINDUSARI</text></svg>`;
+    const wmText = `<svg xmlns='http://www.w3.org/2000/svg' width='410' height='120'><text x='5' y='55' font-family='Times New Roman,serif' font-size='18' font-weight='bold' fill='rgba(0,0,0,0.045)' transform='rotate(-30,205,60)'>SEKOLAH MASTER DEMO KOTA DEMO</text><text x='5' y='105' font-family='Times New Roman,serif' font-size='18' font-weight='bold' fill='rgba(0,0,0,0.045)' transform='rotate(-30,205,110)'>SEKOLAH MASTER DEMO KOTA DEMO</text></svg>`;
     const wmTextB64 = `data:image/svg+xml;base64,${btoa(wmText)}`;
 
     const html = `<!DOCTYPE html>
@@ -7153,9 +7153,9 @@ export default function PortalGuru() {
   <div class="header" style="display:flex;align-items:center;justify-content:center;border-bottom:3px double #000;padding-bottom:8px;margin-bottom:15px">
     ${school?.logo && (school.logo.startsWith("data:") || school.logo.startsWith("http") || school.logo.startsWith("/")) ? `<img src="${school.logo}" alt="Logo" style="height:55px;width:55px;object-fit:contain;margin-right:15px" />` : `<div style="font-size:36px;margin-right:15px">${school?.logo || '🏫'}</div>`}
     <div style="text-align:center">
-      <h3 style="margin:0;font-size:13px;font-weight:bold;text-transform:uppercase">${school?.yayasan || 'YAYASAN AL-QODIRIYAH'}</h3>
+      <h3 style="margin:0;font-size:13px;font-weight:bold;text-transform:uppercase">${school?.yayasan || 'YAYASAN MASTER DEMO'}</h3>
       <h2 style="margin:2px 0;font-size:16px;font-weight:bold;text-transform:uppercase">${school?.nama || 'SEKOLAH MASTER DEMO'}</h2>
-      <p style="margin:0;font-size:10px;font-style:italic">Alamat: ${school?.alamat || 'Jegedeh Wahyurejo, Candisari, Windusari, Magelang'} | Telepon: ${school?.telepon || '-'} | Email: ${school?.email || '-'}</p>
+      <p style="margin:0;font-size:10px;font-style:italic">Alamat: ${school?.alamat || 'Jegedeh Wahyurejo, Candisari, Kota Demo, Magelang'} | Telepon: ${school?.telepon || '-'} | Email: ${school?.email || '-'}</p>
     </div>
   </div>
 
@@ -7575,9 +7575,9 @@ export default function PortalGuru() {
   <div class="header" style="display:flex;align-items:center;justify-content:center;border-bottom:3px double #000;padding-bottom:8px;margin-bottom:15px">
     ${school?.logo && (school.logo.startsWith("data:") || school.logo.startsWith("http") || school.logo.startsWith("/")) ? `<img src="${school.logo}" alt="Logo" style="height:55px;width:55px;object-fit:contain;margin-right:15px" />` : `<div style="font-size:36px;margin-right:15px">${school?.logo || '🏫'}</div>`}
     <div style="text-align:center">
-      <h3 style="margin:0;font-size:13px;font-weight:bold;text-transform:uppercase">${school?.yayasan || 'YAYASAN AL-QODIRIYAH'}</h3>
+      <h3 style="margin:0;font-size:13px;font-weight:bold;text-transform:uppercase">${school?.yayasan || 'YAYASAN MASTER DEMO'}</h3>
       <h2 style="margin:2px 0;font-size:16px;font-weight:bold;text-transform:uppercase">${school?.nama || 'SEKOLAH MASTER DEMO'}</h2>
-      <p style="margin:0;font-size:10px;font-style:italic">Alamat: ${school?.alamat || 'Jegedeh Wahyurejo, Candisari, Windusari, Magelang'} | Telepon: ${school?.telepon || '-'} | Email: ${school?.email || '-'}</p>
+      <p style="margin:0;font-size:10px;font-style:italic">Alamat: ${school?.alamat || 'Jegedeh Wahyurejo, Candisari, Kota Demo, Magelang'} | Telepon: ${school?.telepon || '-'} | Email: ${school?.email || '-'}</p>
     </div>
   </div>
 
@@ -8530,7 +8530,7 @@ export default function PortalGuru() {
             </div>
 
             <div style={{ textAlign: "center" }}>
-              <div>Windusari, {school.tanggalCetak}</div>
+              <div>Kota Demo, {school.tanggalCetak}</div>
               <SignatureBox 
                 title="Mengetahui, Kepala Sekolah" 
                 name={school.kepsek} 
@@ -8549,7 +8549,7 @@ export default function PortalGuru() {
       {/* MODAL PREVIEW WATERMARK */}
       {showWatermarkPreview && (() => {
         const origin = typeof window !== "undefined" ? window.location.origin : "";
-        let previewLogo = `${origin}/logo-smk.png`;
+        let previewLogo = `${origin}/logo-generic.svg`;
         if (school && school.logo && school.logo.trim() !== "" && school.logo !== "🏫") {
           if (school.logo.startsWith("http") || school.logo.startsWith("data:")) {
             previewLogo = school.logo;
@@ -8575,7 +8575,7 @@ export default function PortalGuru() {
               {/* Layer 1: Watermark Teks */}
               <div style={{
                 position: "absolute", top: "-50%", left: "-50%", width: "200%", height: "200%",
-                backgroundImage: `url("data:image/svg+xml;base64,${btoa('<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'410\' height=\'120\'><text x=\'5\' y=\'55\' font-family=\'Times New Roman,serif\' font-size=\'18\' font-weight=\'bold\' fill=\'rgba(0,0,0,0.055)\' transform=\'rotate(-30,205,60)\'>SEKOLAH MASTER DEMO WINDUSARI</text><text x=\'5\' y=\'105\' font-family=\'Times New Roman,serif\' font-size=\'18\' font-weight=\'bold\' fill=\'rgba(0,0,0,0.055)\' transform=\'rotate(-30,205,110)\'>SEKOLAH MASTER DEMO WINDUSARI</text></svg>')}")`,
+                backgroundImage: `url("data:image/svg+xml;base64,${btoa('<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'410\' height=\'120\'><text x=\'5\' y=\'55\' font-family=\'Times New Roman,serif\' font-size=\'18\' font-weight=\'bold\' fill=\'rgba(0,0,0,0.055)\' transform=\'rotate(-30,205,60)\'>SEKOLAH MASTER DEMO KOTA DEMO</text><text x=\'5\' y=\'105\' font-family=\'Times New Roman,serif\' font-size=\'18\' font-weight=\'bold\' fill=\'rgba(0,0,0,0.055)\' transform=\'rotate(-30,205,110)\'>SEKOLAH MASTER DEMO KOTA DEMO</text></svg>')}")`,
                 backgroundRepeat: "repeat", backgroundSize: "410px 120px", pointerEvents: "none", zIndex: 1,
               }} />
               {/* Layer 2: Watermark Logo */}
@@ -9076,7 +9076,7 @@ function SignatureBox({
 function SampulSheet({ student, school }) {
   if (!student || !school) return null;
 
-  const logoSrc = (school.logo && school.logo !== "🏫" && school.logo !== "") ? school.logo : "/logo-smk.png";
+  const logoSrc = (school.logo && school.logo !== "🏫" && school.logo !== "") ? school.logo : "/logo-generic.svg";
 
   return (
     <div className="rapor-print-container" style={{ backgroundColor: "#fff", color: "#000", fontFamily: "'Times New Roman', Times, serif", fontSize: "1rem", marginTop: "1.5rem" }}>
@@ -9374,12 +9374,12 @@ function RaporSheet({ student, school, teachers, loggedInTeacher, subjects, seme
   let homeroomNip = targetWali ? (targetWali.nip !== "-" ? targetWali.nip : "-") : "198804022015091002";
 
   // Siapkan watermark logo
-  const logoSrc = (school.logo && school.logo !== "🏫" && school.logo !== "") ? school.logo : "/logo-smk.png";
+  const logoSrc = (school.logo && school.logo !== "🏫" && school.logo !== "") ? school.logo : "/logo-generic.svg";
 
   return (
     <div className="rapor-print-container" style={{ position: "relative", overflow: "hidden", backgroundColor: "#fff", padding: "3rem", color: "#000", border: "1px solid #ccc", fontFamily: "'Times New Roman', Times, serif", fontSize: "0.95rem", marginTop: "1.5rem", lineHeight: "1.5" }}>
       {/* Latar Belakang Teks Watermark Berulang (Padat) */}
-      <div style={{ position: "absolute", top: "-50%", left: "-50%", width: "200%", height: "200%", backgroundImage: `url("data:image/svg+xml,%3Csvg width='410' height='30' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='0' y='22' font-family='Times New Roman, serif' font-size='24' font-weight='bold' fill='rgba(0,0,0,0.04)'%3ESEKOLAH MASTER DEMO WINDUSARI%26%23160%3B%26%23160%3B%3C/text%3E%3C/svg%3E")`, backgroundRepeat: "repeat", transform: "rotate(-35deg)", pointerEvents: "none", zIndex: 0 }} />
+      <div style={{ position: "absolute", top: "-50%", left: "-50%", width: "200%", height: "200%", backgroundImage: `url("data:image/svg+xml,%3Csvg width='410' height='30' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='0' y='22' font-family='Times New Roman, serif' font-size='24' font-weight='bold' fill='rgba(0,0,0,0.04)'%3ESEKOLAH MASTER DEMO KOTA DEMO%26%23160%3B%26%23160%3B%3C/text%3E%3C/svg%3E")`, backgroundRepeat: "repeat", transform: "rotate(-35deg)", pointerEvents: "none", zIndex: 0 }} />
       {/* Latar Belakang Watermark Logo Transparan */}
       <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "350px", height: "350px", backgroundImage: `url('${logoSrc}')`, backgroundRepeat: "no-repeat", backgroundPosition: "center", backgroundSize: "contain", opacity: 0.06, pointerEvents: "none", zIndex: 1 }} />
 
@@ -9671,12 +9671,12 @@ function SknrSheet({ student, school, subjects }) {
     return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
   };
 
-  const logoSrc = (school.logo && school.logo !== "🏫" && school.logo !== "") ? school.logo : "/logo-smk.png";
+  const logoSrc = (school.logo && school.logo !== "🏫" && school.logo !== "") ? school.logo : "/logo-generic.svg";
 
   return (
     <div className="rapor-print-container" style={{ position: "relative", overflow: "hidden", backgroundColor: "#fff", padding: "3rem", color: "#000", border: "1px solid #ccc", fontFamily: "'Times New Roman', Times, serif", fontSize: "0.95rem", marginTop: "1.5rem", lineHeight: "1.5" }}>
       {/* Latar Belakang Teks Watermark Berulang (Padat) */}
-      <div style={{ position: "absolute", top: "-50%", left: "-50%", width: "200%", height: "200%", backgroundImage: `url("data:image/svg+xml,%3Csvg width='410' height='30' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='0' y='22' font-family='Times New Roman, serif' font-size='24' font-weight='bold' fill='rgba(0,0,0,0.04)'%3ESEKOLAH MASTER DEMO WINDUSARI%26%23160%3B%26%23160%3B%3C/text%3E%3C/svg%3E")`, backgroundRepeat: "repeat", transform: "rotate(-35deg)", pointerEvents: "none", zIndex: 0 }} />
+      <div style={{ position: "absolute", top: "-50%", left: "-50%", width: "200%", height: "200%", backgroundImage: `url("data:image/svg+xml,%3Csvg width='410' height='30' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='0' y='22' font-family='Times New Roman, serif' font-size='24' font-weight='bold' fill='rgba(0,0,0,0.04)'%3ESEKOLAH MASTER DEMO KOTA DEMO%26%23160%3B%26%23160%3B%3C/text%3E%3C/svg%3E")`, backgroundRepeat: "repeat", transform: "rotate(-35deg)", pointerEvents: "none", zIndex: 0 }} />
       {/* Watermark logo */}
       <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "350px", height: "350px", backgroundImage: `url('${logoSrc}')`, backgroundRepeat: "no-repeat", backgroundPosition: "center", backgroundSize: "contain", opacity: 0.06, pointerEvents: "none", zIndex: 1 }} />
 
@@ -9685,7 +9685,7 @@ function SknrSheet({ student, school, subjects }) {
         <img src={logoSrc} alt="Logo Sekolah" style={{ height: "85px", width: "85px", objectFit: "contain", marginRight: "1.5rem" }} />
         <div style={{ textAlign: "center", flex: 1, color: "#000", fontFamily: "'Times New Roman', serif" }}>
           <h3 style={{ fontSize: "1.1rem", fontWeight: "bold", margin: 0, textTransform: "uppercase", letterSpacing: "0.5px" }}>
-            {school.yayasan || "YAYASAN AL QODIRIYAH HASAN IBRAHIM"}
+            {school.yayasan || "YAYASAN MASTER DEMO HASAN IBRAHIM"}
           </h3>
           <h2 style={{ fontSize: "1.25rem", fontWeight: "bold", margin: "2px 0 4px 0", textTransform: "uppercase" }}>
             {school.nama}
@@ -9714,7 +9714,7 @@ function SknrSheet({ student, school, subjects }) {
 
       {/* Pembuka Surat */}
       <p style={{ margin: "0 0 1rem 0", textIndent: "2.5rem" }}>
-        Yang bertanda tangan di bawah ini, Kepala Sekolah Menengah Kejuruan (SMK) Master Demo Windusari, menerangkan dengan sesungguhnya bahwa:
+        Yang bertanda tangan di bawah ini, Kepala Sekolah Menengah Kejuruan (SMK) Master Demo Kota Demo, menerangkan dengan sesungguhnya bahwa:
       </p>
 
       {/* Identitas Siswa */}
@@ -9908,12 +9908,12 @@ const d = new Date(dateStr);
   const isLulus = sem6Record?.naikKelas === true;
   const isTidakLulus = sem6Record?.naikKelas === false;
 
-  const logoSrc = (school.logo && school.logo !== "dY?" && school.logo !== "") ? school.logo : "/logo-smk.png";
+  const logoSrc = (school.logo && school.logo !== "dY?" && school.logo !== "") ? school.logo : "/logo-generic.svg";
 
   return (
     <div style={{ position: "relative", overflow: "hidden", padding: "3rem", backgroundColor: "#fff", color: "#000", fontFamily: "'Times New Roman', Times, serif", fontSize: "11pt", lineHeight: "1.5", minHeight: "100%", width: "100%", margin: "0 auto", boxSizing: "border-box" }}>
       {/* Latar Belakang Teks Watermark Berulang (Padat) */}
-      <div style={{ position: "absolute", top: "-50%", left: "-50%", width: "200%", height: "200%", backgroundImage: `url("data:image/svg+xml,%3Csvg width='410' height='30' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='0' y='22' font-family='Times New Roman, serif' font-size='24' font-weight='bold' fill='rgba(0,0,0,0.04)'%3ESEKOLAH MASTER DEMO WINDUSARI%26%23160%3B%26%23160%3B%3C/text%3E%3C/svg%3E")`, backgroundRepeat: "repeat", transform: "rotate(-35deg)", pointerEvents: "none", zIndex: 0 }} />
+      <div style={{ position: "absolute", top: "-50%", left: "-50%", width: "200%", height: "200%", backgroundImage: `url("data:image/svg+xml,%3Csvg width='410' height='30' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='0' y='22' font-family='Times New Roman, serif' font-size='24' font-weight='bold' fill='rgba(0,0,0,0.04)'%3ESEKOLAH MASTER DEMO KOTA DEMO%26%23160%3B%26%23160%3B%3C/text%3E%3C/svg%3E")`, backgroundRepeat: "repeat", transform: "rotate(-35deg)", pointerEvents: "none", zIndex: 0 }} />
       {/* Watermark logo */}
       <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "350px", height: "350px", backgroundImage: `url('${logoSrc}')`, backgroundRepeat: "no-repeat", backgroundPosition: "center", backgroundSize: "contain", opacity: 0.06, pointerEvents: "none", zIndex: 1 }} />
       
@@ -9922,7 +9922,7 @@ const d = new Date(dateStr);
         <img src={logoSrc} alt="Logo Sekolah" style={{ height: "85px", width: "85px", objectFit: "contain", marginRight: "1.5rem" }} />
         <div style={{ textAlign: "center", flex: 1, color: "#000", fontFamily: "'Times New Roman', serif" }}>
           <h3 style={{ fontSize: "1.1rem", fontWeight: "bold", margin: 0, textTransform: "uppercase", letterSpacing: "0.5px" }}>
-            {school.yayasan || "YAYASAN AL QODIRIYAH HASAN IBRAHIM"}
+            {school.yayasan || "YAYASAN MASTER DEMO HASAN IBRAHIM"}
           </h3>
           <h2 style={{ fontSize: "1.25rem", fontWeight: "bold", margin: "2px 0 4px 0", textTransform: "uppercase" }}>
             {school.nama}
@@ -10185,7 +10185,7 @@ function LedgerSheet({ students, school, teachers, loggedInTeacher, subjects, se
     rankMap[sortedStudents[i].nisn] = currentRank;
   }
 
-  const logoSrc = (school.logo && school.logo !== "🏫" && school.logo !== "") ? school.logo : "/logo-smk.png";
+  const logoSrc = (school.logo && school.logo !== "🏫" && school.logo !== "") ? school.logo : "/logo-generic.svg";
 
   return (
     <div className="rapor-print-container" style={{ position: "relative", backgroundColor: "#fff", padding: "3rem", color: "#000", border: "1px solid #ccc", fontFamily: "'Times New Roman', Times, serif", fontSize: "0.95rem", marginTop: "1.5rem", lineHeight: "1.5" }}>

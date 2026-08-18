@@ -2,7 +2,7 @@ const Jimp = require('jimp');
 
 async function removeWhite() {
   try {
-    const image = await Jimp.read('public/logo-smk.png');
+    const image = await Jimp.read('public/logo-generic.svg');
     
     // We must ensure the image has an alpha channel
     image.rgba(true);
@@ -23,8 +23,8 @@ async function removeWhite() {
     
     console.log(`Changed ${changed} pixels to transparent.`);
     
-    await image.writeAsync('public/logo-smk-trans-v4.png');
-    console.log('Saved to public/logo-smk-trans-v4.png');
+    await image.writeAsync('public/logo-generic.svg');
+    console.log('Saved to public/logo-generic.svg');
   } catch (err) {
     console.error(err);
   }

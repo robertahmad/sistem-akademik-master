@@ -24,7 +24,7 @@ export default async function CetakSppd({ params }) {
 
   const dayDiff = Math.ceil((new Date(sppd.tanggalKembali) - new Date(sppd.tanggalBerangkat)) / (1000 * 60 * 60 * 24)) + 1;
 
-  let logoUrl = "/logo-smk.png";
+  let logoUrl = "/logo-generic.svg";
   if (school?.logo && school.logo.length > 5) {
     if (school.logo.startsWith("http") || school.logo.startsWith("data:")) {
       logoUrl = school.logo;
@@ -65,10 +65,10 @@ export default async function CetakSppd({ params }) {
             <img src={logoUrl} alt="Logo Sekolah" style={{ height: "85px", width: "85px", objectFit: "contain", marginRight: "1.5rem" }} />
             <div style={{ textAlign: "center", flex: 1, color: "#000", fontFamily: "'Times New Roman', serif" }}>
               <h3 style={{ fontSize: "1.1rem", fontWeight: "bold", margin: 0, textTransform: "uppercase", letterSpacing: "0.5px" }}>
-                {school?.yayasan || "YAYASAN AL QODIRIYAH HASAN IBRAHIM"}
+                {school?.yayasan || "YAYASAN MASTER DEMO HASAN IBRAHIM"}
               </h3>
               <h2 style={{ fontSize: "1.25rem", fontWeight: "bold", margin: "2px 0 4px 0", textTransform: "uppercase" }}>
-                {school?.nama || "SEKOLAH MASTER DEMO WINDUSARI"}
+                {school?.nama || "SEKOLAH MASTER DEMO KOTA DEMO"}
               </h2>
               <div style={{ fontSize: "0.85rem", margin: "2px 0" }}>
                 Nomor SK Ijin Operasional : {school?.skIjin || "188.4/61081/20.2b/2015"}
@@ -138,7 +138,7 @@ export default async function CetakSppd({ params }) {
           </table>
 
           <div className="signature-box">
-            <p style={{ margin: 0 }}>Dikeluarkan di: Windusari</p>
+            <p style={{ margin: 0 }}>Dikeluarkan di: Kota Demo</p>
             <p style={{ margin: "0 0 10px 0" }}>Tanggal: {formatDate(sppd.createdAt)}</p>
             <p style={{ margin: 0 }}>Kepala Sekolah,</p>
             <div style={{ height: "65px", margin: "10px 0", position: "relative" }}>

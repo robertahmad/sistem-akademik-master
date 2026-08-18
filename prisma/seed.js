@@ -1,3 +1,4 @@
+require('dotenv').config();
 const { Pool } = require('pg');
 const { PrismaPg } = require('@prisma/adapter-pg');
 const { PrismaClient } = require('@prisma/client');
@@ -39,7 +40,7 @@ async function main() {
       semester: "Ganjil",
       tahunAjaran: "2026/2027",
       tanggalCetak: "4 Juli 2026",
-      yayasan: "YAYASAN AL QODIRIYAH HASAN IBRAHIM",
+      yayasan: "YAYASAN MASTER DEMO HASAN IBRAHIM",
       skIjin: "188.4/61081/20.2b/2015",
       nss: "202030816051",
       telepon: "085228476578, 08587399500",
@@ -268,7 +269,7 @@ async function main() {
       nisn: "0098765432",
       nis: "24000",
       kelas: "XII-DKV",
-      alamat: "Jl. KH. Ahmad Dahlan No. 34, Windusari",
+      alamat: "Jl. KH. Ahmad Dahlan No. 34, Kota Demo",
       namaOrangTua: "H. Fauzi",
       tempatLahir: "Magelang",
       tanggalLahir: "2011-03-10",
@@ -369,3 +370,4 @@ main()
   .finally(async () => {
     await prisma.$disconnect();
   });
+
