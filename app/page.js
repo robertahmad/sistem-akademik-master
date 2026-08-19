@@ -349,7 +349,7 @@ export default function Home() {
 
         <nav className="hero-navbar">
           <div className="nav-logo">
-            <img src="/logo-generic.svg" alt="Logo SMK" />
+            <img src={school?.logo || "/logo-generic.svg"} alt="Logo Sekolah" style={{width:"50px", height:"50px", objectFit:"contain", mixBlendMode:"multiply"}} />
             <div className="nav-logo-text">
               <p className="smp">SEKOLAH MASTER DEMO</p>
               <p className="al-mumtaz">KOTA DEMO</p>
@@ -370,7 +370,7 @@ export default function Home() {
         </nav>
 
         <div className="hero-center">
-          <img src="/logo-generic.svg" alt="Logo Tengah" className="logo-center" />
+          <img src={school?.logo || "/logo-generic.svg"} alt="Logo Tengah" className="logo-center" />
           <div className="badge-generasi">GENERASI MASTER DEMO</div>
           
           <h1 className="title-huge">
@@ -395,7 +395,7 @@ export default function Home() {
       <section className="section section-white">
         <div className="container welcome-speech">
           <div className="principal-photo-wrapper">
-            <img src={school?.logo && school.logo.startsWith("data:image/") ? school.logo : "/logo-generic.svg"} alt="Logo Sekolah" className="principal-photo" style={{ objectFit: "contain", padding: "1.5rem" }} />
+            <img src={school?.logo && school.logo !== "dY?" ? school.logo : "/logo-generic.svg"} alt="Logo Sekolah" className="principal-photo" style={{ objectFit: "contain", padding: "1.5rem" }} />
           </div>
           <div className="speech-content">
             <span style={{ fontWeight: 700, color: "var(--secondary)", textTransform: "uppercase", fontSize: "0.85rem", letterSpacing: "0.05em" }}>

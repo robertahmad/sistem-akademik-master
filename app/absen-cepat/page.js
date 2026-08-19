@@ -280,7 +280,7 @@ export default function AbsenCepatPage() {
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
           {school ? (
-            logoSrc.startsWith("data:image/") ? (
+            logoSrc !== "dY?" ? (
               <img src={logoSrc} alt="Logo" style={{ height: "50px", width: "50px", objectFit: "contain" }} />
             ) : (
               <div style={{ fontSize: "2.5rem" }}>{logoSrc}</div>

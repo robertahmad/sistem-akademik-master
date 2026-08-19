@@ -41,7 +41,7 @@ export default function Header({ logo = "/logo-generic.svg" }) {
         <Link href="/" className="logo-wrapper" onClick={closeMenu}>
           <img src={logo} alt="Logo Sekolah Master Demo" style={{ width: "3.2rem", height: "3.2rem", objectFit: "contain", flexShrink: 0 }} />
           <div className="logo-text">
-            <span className="logo-title">SMK MASTER DEMO</span>
+            <span className="logo-title">SEKOLAH MASTER DEMO</span>
             <span className="logo-subtitle">Kota Demo</span>
           </div>
         </Link>

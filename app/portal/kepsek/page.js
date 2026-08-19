@@ -833,7 +833,7 @@ export default function PortalKepsek() {
                           <h4 style={{ fontWeight: 700, color: "var(--primary-dark)", marginBottom: "1.5rem" }}>Logo Sekolah & Watermark</h4>
                           
                           <div style={{ width: "150px", height: "150px", border: "1px solid var(--border-color)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "white", fontSize: "4rem", marginBottom: "1.5rem", overflow: "hidden", position: "relative" }}>
-                            {schoolLogoPreview && schoolLogoPreview.startsWith("data:image/") ? (
+                            {schoolLogoPreview && schoolLogoPreview !== "dY?" ? (
                               <img src={schoolLogoPreview} alt="Logo" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
                             ) : (
                               schoolLogoPreview

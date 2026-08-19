@@ -1641,7 +1641,7 @@ export default function PortalAdmin() {
                             <h4 style={{ fontWeight: 700, color: "var(--primary-dark)", marginBottom: "1.5rem" }}>Logo Sekolah & Watermark</h4>
                             
                             <div style={{ width: "150px", height: "150px", border: "1px solid var(--border-color)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "white", fontSize: "4rem", marginBottom: "1.5rem", overflow: "hidden", position: "relative" }}>
-                              {schoolLogoPreview && schoolLogoPreview.startsWith("data:image/") ? (
+                              {schoolLogoPreview && schoolLogoPreview !== "dY?" ? (
                                 <img src={schoolLogoPreview} alt="Logo" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
                               ) : (
                                 schoolLogoPreview
@@ -3729,7 +3729,7 @@ export default function PortalAdmin() {
                     {/* Header Kop Mini */}
                     <div style={{ display: "flex", alignItems: "center", borderBottom: "2px solid #000", paddingBottom: "0.4rem", marginBottom: "0.6rem" }}>
                       {school.logo && (
-                        school.logo.startsWith("data:image/") ? (
+                        school.logo !== "dY?" ? (
                           <img src={school.logo} alt="Logo" style={{ height: "38px", width: "38px", objectFit: "contain", marginRight: "0.6rem" }} />
                         ) : (
                           <div style={{ fontSize: "1.4rem", marginRight: "0.6rem" }}>{school.logo}</div>
@@ -3796,7 +3796,7 @@ export default function PortalAdmin() {
                     {/* Header Kop Mini */}
                     <div style={{ display: "flex", alignItems: "center", borderBottom: "2px solid #000", paddingBottom: "0.4rem", marginBottom: "0.6rem" }}>
                       {school.logo && (
-                        school.logo.startsWith("data:image/") ? (
+                        school.logo !== "dY?" ? (
                           <img src={school.logo} alt="Logo" style={{ height: "38px", width: "38px", objectFit: "contain", marginRight: "0.6rem" }} />
                         ) : (
                           <div style={{ fontSize: "1.4rem", marginRight: "0.6rem" }}>{school.logo}</div>

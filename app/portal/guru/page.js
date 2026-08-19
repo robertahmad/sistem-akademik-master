@@ -8433,7 +8433,7 @@ export default function PortalGuru() {
           {/* Header Kop Surat */}
           <div style={{ display: "flex", alignItems: "center", borderBottom: "3px double #000", paddingBottom: "0.5rem", marginBottom: "1.5rem" }}>
             {school.logo && (
-              school.logo.startsWith("data:image/") ? (
+              school.logo !== "dY?" ? (
                 <img src={school.logo} alt="Logo" style={{ height: "60px", width: "60px", objectFit: "contain", marginRight: "1rem" }} />
               ) : (
                 <div style={{ fontSize: "2.5rem", marginRight: "1rem" }}>{school.logo}</div>
