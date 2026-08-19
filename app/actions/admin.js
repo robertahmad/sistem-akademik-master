@@ -1321,8 +1321,6 @@ export async function updateSubjectSemesters(id, semestersString) {
 
 export async function updateSchoolPublicContent(data) {
   try {
-    const { getSession } = require('./auth');
-    const prisma = require('../../lib/prisma').default;
     const session = await getSession();
     if (!session || (session.role !== 'admin' && session.role !== 'kepsek')) {
       return { success: false, error: 'Unauthorized' };
@@ -1349,7 +1347,6 @@ export async function updateSchoolPublicContent(data) {
 
 export async function uploadPublicPhoto(formData) {
   try {
-    const { getSession } = require('./auth');
     const session = await getSession();
     if (!session || (session.role !== 'admin' && session.role !== 'kepsek')) {
       return { success: false, error: 'Unauthorized' };
@@ -1357,7 +1354,6 @@ export async function uploadPublicPhoto(formData) {
     const file = formData.get('file');
     if (!file) return { success: false, error: 'Tidak ada file' };
 
-    const { put } = require('@vercel/blob');
     const blob = await put(`public/${Date.now()}-${file.name}`, file, {
       access: 'public',
     });
