@@ -71,7 +71,9 @@ export default function PortalAdmin() {
     telepon: "085228476578, 08587399500",
     email: "smpalqodiriyah@gmail.com"
   });
-  const [teachers, setTeachers] = useState([]);
+    const [majors, setMajors] = useState([]);
+  const [newMajor, setNewMajor] = useState({ code: '', name: '' });
+const [teachers, setTeachers] = useState([]);
   const [students, setStudents] = useState([]);
   const [subjects, setSubjects] = useState([]);
   const [extracurriculars, setExtracurriculars] = useState([]);

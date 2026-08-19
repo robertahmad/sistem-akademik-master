@@ -46,18 +46,12 @@ export async function getAdminDashboard() {
       orderBy: { name: "asc" }
     });
 
-    const examSchedules = await prisma.examSchedule.findMany({
-      orderBy: { startTime: "asc" }
-    });
+    const examSchedules = await prisma.examSchedule.findMany({ orderBy: { startTime: "asc" } });
+    let majors = await prisma.major.findMany({ orderBy: { code: 'asc' } });
+    if (majors.length === 0) { await prisma.major.create({ data: { code: 'DKV', name: 'Desain Komunikasi Visual', unit: 'SMK' } }); majors = await prisma.major.findMany({ orderBy: { code: 'asc' } }); }
 
     return {
-      success: true,
-      school,
-      teachers,
-      students,
-      subjects,
-      extracurriculars,
-      examSchedules
+      success: true, school, teachers, students, subjects, extracurriculars, examSchedules, majors
     };
   } catch (e) {
     console.error("CRITICAL ERROR IN getAdminDashboard:", e);
