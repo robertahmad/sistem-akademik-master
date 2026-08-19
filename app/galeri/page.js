@@ -4,52 +4,31 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { getSchoolProfilePublic } from "../actions/admin";
 
+
 export default function Galeri() {
   const [activeFilter, setActiveFilter] = useState("all");
-  const [items, setItems] = useState([
-    {
-      id: 1,
-      category: "belajar",
-      image: "/hero_school.jpg",
-      title: "Gedung dan Taman Sekolah",
-      categoryName: "Kegiatan Belajar",
-    },
-    {
-      id: 2,
-      category: "belajar",
-      image: "/facility_computer.jpg",
-      title: "Praktikum Mandiri Lab TIK",
-      categoryName: "Kegiatan Belajar",
-    },
-    {
-      id: 3,
-      category: "lomba",
-      image: "/extracurricular_scout.jpg",
-      title: "Kemah Bakti Pramuka",
-      categoryName: "Prestasi & Lomba",
-    },
-    {
-      id: 4,
-      category: "lomba",
-      image: "/news_silat.jpg",
-      title: "Penyerahan Piala Juara Silat",
-      categoryName: "Prestasi & Lomba",
-    },
-    {
-      id: 5,
-      category: "agama",
-      image: "/news_ramadhan.jpg",
-      title: "Tadarus Bersama di Masjid",
-      categoryName: "Keagamaan",
-    },
-    {
-      id: 6,
-      category: "agama",
-      image: "/principal.jpeg",
-      title: "Kajian Keislaman Rutin Guru",
-      categoryName: "Keagamaan",
-    },
-  ]);
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    async function loadData() {
+      const res = await getSchoolProfilePublic();
+      if (res.success && res.school) {
+        if (res.school.galeriImages) {
+          const arr = res.school.galeriImages.split(';').filter(Boolean);
+          const newItems = arr.map((img, idx) => ({
+            id: idx + 1,
+            category: "all",
+            image: img,
+            title: "Galeri Foto " + (idx + 1),
+            categoryName: "Dokumentasi",
+          }));
+          setItems(newItems);
+        }
+      }
+    }
+    loadData();
+  }, []);
+
 
   useEffect(() => {
     async function loadSchool() {

@@ -11,7 +11,7 @@ export default function PortalMenu() {
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          background-image: linear-gradient(rgba(15, 23, 42, 0.4), rgba(30, 41, 59, 0.6)), url('/image/bg-hero-portal-login-jpg.jpg');
+          background-image: linear-gradient(rgba(15, 23, 42, 0.4), rgba(30, 41, 59, 0.6)), url('/image/bg-login.jpg');
           background-position: center;
           background-size: cover;
           background-repeat: no-repeat;

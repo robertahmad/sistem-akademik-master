@@ -76,12 +76,11 @@ export default async function Akademik() {
             <p className="section-subtitle">Penyediaan infrastruktur modern untuk memastikan siswa mendapatkan pengalaman praktikum dan kenyamanan belajar terbaik.</p>
           </div>
 
+          {school?.akademikImage && <div style={{ marginBottom: "2rem", borderRadius: "1rem", overflow: "hidden" }}><img src={school.akademikImage} alt="Fasilitas Akademik" style={{ width: "100%", height: "auto", objectFit: "cover", maxHeight: "400px" }} /></div>}
           <div className="facility-grid">
             {/* Fasilitas 1 */}
             <div className="facility-card">
-              <div className="facility-image-wrapper">
-                <img src="/facility_computer.jpg" alt="Laboratorium Komputer" className="facility-image" />
-              </div>
+              
               <div className="facility-info">
                 <h3 className="facility-title">Laboratorium Komputer</h3>
                 <p className="facility-description">Ruang komputer ber-AC dengan koneksi internet cepat untuk mendukung ujian berbasis komputer, kelas TIK, dan pemrograman dasar.</p>
@@ -90,9 +89,7 @@ export default async function Akademik() {
 
             {/* Fasilitas 2 */}
             <div className="facility-card">
-              <div className="facility-image-wrapper">
-                <img src="/hero_school.jpg" alt="Perpustakaan Digital" className="facility-image" />
-              </div>
+              
               <div className="facility-info">
                 <h3 className="facility-title">Perpustakaan & Ruang Baca</h3>
                 <p className="facility-description">Koleksi buku kurikulum lengkap, ensiklopedia, novel edukasi, serta fasilitas komputer mini untuk akses e-book sekolah.</p>
@@ -101,9 +98,7 @@ export default async function Akademik() {
 
             {/* Fasilitas 3 */}
             <div className="facility-card">
-              <div className="facility-image-wrapper">
-                <img src="/news_ramadhan.jpg" alt="Masjid Master Demo" className="facility-image" />
-              </div>
+              
               <div className="facility-info">
                 <h3 className="facility-title">Masjid Master Demo</h3>
                 <p className="facility-description">Masjid yang luas di lingkungan sekolah sebagai pusat pembiasaan shalat berjamaah, dhuha bersama, tadarus, dan kajian keagamaan.</p>
@@ -124,9 +119,7 @@ export default async function Akademik() {
           <div className="extra-grid">
             {/* Ekstra 1 */}
             <div className="extra-card">
-              <div className="extra-image-wrapper">
-                <img src="/extracurricular_scout.jpg" alt="Ekstrakurikuler Pramuka" className="extra-image" />
-              </div>
+              
               <div className="extra-info">
                 <h3 className="extra-title">Gerakan Pramuka</h3>
                 <p className="extra-description">Ekstrakurikuler wajib untuk melatih kedisiplinan, jiwa kepemimpinan, kepedulian sosial, serta keterampilan bertahan hidup di alam bebas.</p>
@@ -135,9 +128,7 @@ export default async function Akademik() {
 
             {/* Ekstra 2 */}
             <div className="extra-card">
-              <div className="extra-image-wrapper">
-                <img src="/news_silat.jpg" alt="Ekstrakurikuler Pencak Silat" className="extra-image" />
-              </div>
+              
               <div className="extra-info">
                 <h3 className="extra-title">Pencak Silat Pagar Nusa</h3>
                 <p className="extra-description">Seni bela diri tradisional untuk melatih kesehatan fisik, mental spiritual, pertahanan diri, serta meraih prestasi di berbagai ajang perlombaan.</p>
@@ -146,9 +137,7 @@ export default async function Akademik() {
 
             {/* Ekstra 3 */}
             <div className="extra-card">
-              <div className="extra-image-wrapper">
-                <img src="/news_ramadhan.jpg" alt="Hadroh / Rebana" className="extra-image" />
-              </div>
+              
               <div className="extra-info">
                 <h3 className="extra-title">Seni Hadroh & Rebana</h3>
                 <p className="extra-description">Mengembangkan kecintaan pada shalawat nabi dan seni musik rebana modern, sering tampil di acara hari besar Islam sekolah.</p>
@@ -157,9 +146,7 @@ export default async function Akademik() {
 
             {/* Ekstra 4 */}
             <div className="extra-card">
-              <div className="extra-image-wrapper">
-                <img src="/facility_computer.jpg" alt="English Club" className="extra-image" />
-              </div>
+              
               <div className="extra-info">
                 <h3 className="extra-title">English Club</h3>
                 <p className="extra-description">Wadah bagi siswa untuk memperdalam kemampuan berbahasa Inggris lewat permainan, drama, dan simulasi pidato/debat sederhana.</p>

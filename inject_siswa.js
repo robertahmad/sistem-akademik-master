@@ -1,22 +1,21 @@
 const fs = require('fs');
-let content = fs.readFileSync('app/portal/siswa/page.js', 'utf8');
+const p = 'C:/Users/USER/.gemini/antigravity/scratch/sistem-akademik-master/app/portal/admin/page.js';
+let c = fs.readFileSync(p, 'utf8');
 
-if (!content.includes('import SiswaPenugasanTab')) {
-  content = content.replace('import UjianSiswaSheet', 'import SiswaPenugasanTab from \'./SiswaPenugasanTab\';\nimport UjianSiswaSheet');
+const sIdx = c.indexOf('<label className="form-label">Kelas / Tingkat Siswa *</label>');
+if(sIdx > -1) {
+  const injection = `
+  <div className="form-group" style={{marginTop: "1rem"}}>
+    <label className="form-label">Jurusan / Program</label>
+    <select className="form-select" value={newSiswa.jurusan || ''} onChange={e => setNewSiswa({...newSiswa, jurusan: e.target.value})}>
+      <option value="">-- Umum / Tanpa Jurusan --</option>
+      {majors.map(m => <option key={m.id} value={m.code}>{m.code} - {m.name}</option>)}
+    </select>
+  </div>
+  `;
+  c = c.substring(0, sIdx) + injection + c.substring(sIdx);
+  fs.writeFileSync(p, c);
+  console.log('Jurusan added to Siswa modal');
+} else {
+  console.log('Siswa modal label not found');
 }
-
-if (!content.includes('activeTab === "penugasan"')) {
-  content = content.replace('className={\sidebar-btn \\}', 'className={\sidebar-btn \\}');
-  // Inject button right after beranda button
-  const btnSearch = 'className={\sidebar-btn \\}\n                  onClick={() => setActiveTab("beranda")}\n                >\n                  ?? Beranda\n                </button>';
-  const btnReplace = btnSearch + '\n                <button \n                  className={\sidebar-btn \\}\n                  onClick={() => setActiveTab("penugasan")}\n                >\n                  ?? Tugas Saya\n                </button>';
-  content = content.replace(btnSearch, btnReplace);
-
-  // Inject rendering logic right after beranda block
-  const renderSearch = '{activeTab === "beranda" && (';
-  const renderReplace = '{activeTab === "penugasan" && (\n                <SiswaPenugasanTab student={student} activeSubject={activeSubject} />\n              )}\n\n              ' + renderSearch;
-  content = content.replace(renderSearch, renderReplace);
-}
-
-fs.writeFileSync('app/portal/siswa/page.js', content, 'utf8');
-console.log('Siswa injected');

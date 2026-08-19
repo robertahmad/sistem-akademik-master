@@ -8,8 +8,7 @@ import Link from "next/link";
 import * as XLSX from "xlsx";
 import { loginAction, logoutAction } from "../../actions/auth";
 import AdminPerpustakaan from "./AdminPerpustakaan";
-import { 
-  getAdminDashboard, 
+import { getAdminDashboard, saveMajor, deleteMajor, updateSchoolPublicContent, uploadPublicPhoto, 
   saveSchoolProfile, 
   addTeacher, 
   deleteTeacher, 
@@ -420,6 +419,7 @@ export default function PortalAdmin() {
       setStudents(res.students);
       setSubjects(res.subjects);
       setExtracurriculars(res.extracurriculars || []);
+        setMajors(res.majors || []);
       setExamSchedules(res.examSchedules || []);
       
       setNewGuru(prev => ({
@@ -1205,10 +1205,13 @@ export default function PortalAdmin() {
                     </svg>
                     Perpustakaan Digital
                   </button>
-                  <button 
-                    className={`sidebar-btn ${activeTab === "mapel" ? "active" : ""}`}
-                    onClick={() => { setActiveTab("mapel"); setMapelMessage(""); }}
-                  >
+                  <button className={`sidebar-btn ${activeTab === "jurusan" ? "active" : ""}`} onClick={() => setActiveTab("jurusan")}>
+  <svg className="tab-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ display: "block" }}>
+    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+  </svg>
+  Jurusan / Program
+</button>
+<button className={`sidebar-btn ${activeTab === "mapel" ? "active" : ""}`} onClick={() => { setActiveTab("mapel"); setMapelMessage(""); }}>
                     <svg className="tab-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ display: "block" }}>
                       <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
                       <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
@@ -1719,192 +1722,96 @@ export default function PortalAdmin() {
                           </div>
                         </div>
                       </form>
+                    
                     ) : schoolSubTab === "konten" ? (
-                      <form onSubmit={handleSchoolSubmit} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem" }}>
-                        {/* Sisi Kiri: Beranda & Profil */}
+                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem" }}>
                         <div>
-                          <h3 style={{ fontWeight: 800, color: "var(--primary-dark)", fontSize: "1.1rem", borderBottom: "2px solid var(--border-color)", paddingBottom: "0.25rem", marginBottom: "1rem" }}>🌐 Halaman Beranda (Home)</h3>
-                          
+                          <h3 style={{ fontWeight: 800, color: "var(--primary-dark)", fontSize: "1.1rem", borderBottom: "2px solid var(--border-color)", paddingBottom: "0.25rem", marginBottom: "1rem" }}>📝 Konten Halaman</h3>
                           <div className="form-group">
                             <label className="form-label">Judul Utama Hero (Beranda)</label>
-                            <input 
-                              type="text" 
-                              className="form-input" 
-                              value={school.heroTitle || ""} 
-                              onChange={(e) => setSchool(prev => ({ ...prev, heroTitle: e.target.value }))}
-                              placeholder="Gunakan tanda & untuk mewarnai kata berikutnya"
-                            />
+                            <input type="text" className="form-input" value={school.heroTitle || ""} onChange={(e) => setSchool(prev => ({ ...prev, heroTitle: e.target.value }))} />
                           </div>
-
                           <div className="form-group" style={{ marginTop: "1rem" }}>
                             <label className="form-label">Subjudul Hero (Beranda)</label>
-                            <textarea 
-                              className="form-textarea" 
-                              value={school.heroSubtitle || ""} 
-                              onChange={(e) => setSchool(prev => ({ ...prev, heroSubtitle: e.target.value }))}
-                              style={{ height: "60px" }}
-                            />
+                            <textarea className="form-textarea" value={school.heroSubtitle || ""} onChange={(e) => setSchool(prev => ({ ...prev, heroSubtitle: e.target.value }))} style={{ height: "60px" }} />
                           </div>
-
                           <div className="form-group" style={{ marginTop: "1rem" }}>
-                            <label className="form-label">Judul Sambutan Kepala Sekolah</label>
-                            <input 
-                              type="text" 
-                              className="form-input" 
-                              value={school.sambutanTitle || ""} 
-                              onChange={(e) => setSchool(prev => ({ ...prev, sambutanTitle: e.target.value }))}
-                            />
+                            <label className="form-label">Teks Sejarah (Profil)</label>
+                            <textarea className="form-textarea" value={school.sejarahText || ""} onChange={(e) => setSchool(prev => ({ ...prev, sejarahText: e.target.value }))} style={{ height: "150px" }} />
                           </div>
-
-                          <div className="form-group" style={{ marginTop: "1rem" }}>
-                            <label className="form-label">Isi Teks Sambutan</label>
-                            <textarea 
-                              className="form-textarea" 
-                              value={school.sambutanText || ""} 
-                              onChange={(e) => setSchool(prev => ({ ...prev, sambutanText: e.target.value }))}
-                              style={{ height: "120px" }}
-                            />
-                          </div>
-
-                          <div className="form-group" style={{ marginTop: "1rem" }}>
-                            <label className="form-label">Nama Kepala Sekolah (Penulis Sambutan)</label>
-                            <input 
-                              type="text" 
-                              className="form-input" 
-                              value={school.sambutanAuthor || ""} 
-                              onChange={(e) => setSchool(prev => ({ ...prev, sambutanAuthor: e.target.value }))}
-                            />
-                          </div>
-
-                          <h3 style={{ fontWeight: 800, color: "var(--primary-dark)", fontSize: "1.1rem", borderBottom: "2px solid var(--border-color)", paddingBottom: "0.25rem", marginTop: "2rem", marginBottom: "1rem" }}>🏫 Halaman Profil</h3>
-                          
-                          <div className="form-group">
-                            <label className="form-label">Judul Sejarah Sekolah</label>
-                            <input 
-                              type="text" 
-                              className="form-input" 
-                              value={school.sejarahTitle || ""} 
-                              onChange={(e) => setSchool(prev => ({ ...prev, sejarahTitle: e.target.value }))}
-                            />
-                          </div>
-
-                          <div className="form-group" style={{ marginTop: "1rem" }}>
-                            <label className="form-label">Isi Teks Sejarah</label>
-                            <textarea 
-                              className="form-textarea" 
-                              value={school.sejarahText || ""} 
-                              onChange={(e) => setSchool(prev => ({ ...prev, sejarahText: e.target.value }))}
-                              style={{ height: "120px" }}
-                            />
-                          </div>
-
-                          <div className="form-group" style={{ marginTop: "1rem" }}>
-                            <label className="form-label">Teks Visi Sekolah</label>
-                            <textarea 
-                              className="form-textarea" 
-                              value={school.visiText || ""} 
-                              onChange={(e) => setSchool(prev => ({ ...prev, visiText: e.target.value }))}
-                              style={{ height: "60px" }}
-                            />
-                          </div>
-
-                          <div className="form-group" style={{ marginTop: "1rem" }}>
-                            <label className="form-label">Misi Sekolah (Pisahkan dengan titik koma ";")</label>
-                            <textarea 
-                              className="form-textarea" 
-                              value={school.misiText || ""} 
-                              onChange={(e) => setSchool(prev => ({ ...prev, misiText: e.target.value }))}
-                              style={{ height: "100px" }}
-                              placeholder="Misi 1; Misi 2; Misi 3"
-                            />
-                          </div>
+                          <button type="button" className="btn btn-primary" style={{ marginTop: "1rem" }} onClick={async () => {
+                            const r = await updateSchoolPublicContent(school);
+                            if (r.success) { alert("Konten teks berhasil disimpan!"); fetchDashboard(); }
+                            else { alert("Gagal menyimpan teks: " + r.error); }
+                          }}>Simpan Teks Konten</button>
                         </div>
-
-                        {/* Sisi Kanan: Akademik, Galeri & Kontak */}
                         <div>
-                          <h3 style={{ fontWeight: 800, color: "var(--primary-dark)", fontSize: "1.1rem", borderBottom: "2px solid var(--border-color)", paddingBottom: "0.25rem", marginBottom: "1rem" }}>🎓 Halaman Akademik</h3>
+                          <h3 style={{ fontWeight: 800, color: "var(--primary-dark)", fontSize: "1.1rem", borderBottom: "2px solid var(--border-color)", paddingBottom: "0.25rem", marginBottom: "1rem" }}>📸 Gambar Halaman Publik</h3>
                           
                           <div className="form-group">
-                            <label className="form-label">Teks Pengantar Akademik</label>
-                            <textarea 
-                              className="form-textarea" 
-                              value={school.akademikText || ""} 
-                              onChange={(e) => setSchool(prev => ({ ...prev, akademikText: e.target.value }))}
-                              style={{ height: "60px" }}
-                            />
+                            <label className="form-label">Upload Foto Profil Sekolah</label>
+                            <input type="file" className="form-input" accept="image/*" onChange={async (e) => {
+                              if (!e.target.files[0]) return;
+                              const fd = new FormData(); fd.append("file", e.target.files[0]);
+                              const res = await uploadPublicPhoto(fd);
+                              if (res.success) {
+                                await updateSchoolPublicContent({ profilImage: res.photoUrl });
+                                alert("Foto Profil berhasil diunggah!");
+                                fetchDashboard();
+                              }
+                            }} />
+                            {school.profilImage && <img src={school.profilImage} alt="Profil" style={{ width: "100px", marginTop: "0.5rem" }} />}
                           </div>
 
                           <div className="form-group" style={{ marginTop: "1rem" }}>
-                            <label className="form-label">Detail Sistem Kurikulum</label>
-                            <input 
-                              type="text" 
-                              className="form-input" 
-                              value={school.kurikulumDetail || ""} 
-                              onChange={(e) => setSchool(prev => ({ ...prev, kurikulumDetail: e.target.value }))}
-                            />
+                            <label className="form-label">Upload Foto Akademik</label>
+                            <input type="file" className="form-input" accept="image/*" onChange={async (e) => {
+                              if (!e.target.files[0]) return;
+                              const fd = new FormData(); fd.append("file", e.target.files[0]);
+                              const res = await uploadPublicPhoto(fd);
+                              if (res.success) {
+                                await updateSchoolPublicContent({ akademikImage: res.photoUrl });
+                                alert("Foto Akademik berhasil diunggah!");
+                                fetchDashboard();
+                              }
+                            }} />
+                            {school.akademikImage && <img src={school.akademikImage} alt="Akademik" style={{ width: "100px", marginTop: "0.5rem" }} />}
                           </div>
 
                           <div className="form-group" style={{ marginTop: "1rem" }}>
-                            <label className="form-label">Jam Pembelajaran Sekolah</label>
-                            <input 
-                              type="text" 
-                              className="form-input" 
-                              value={school.jamBelajar || ""} 
-                              onChange={(e) => setSchool(prev => ({ ...prev, jamBelajar: e.target.value }))}
-                            />
+                            <label className="form-label">Upload Foto Galeri (Tambah Baru)</label>
+                            <input type="file" className="form-input" accept="image/*" onChange={async (e) => {
+                              if (!e.target.files[0]) return;
+                              const fd = new FormData(); fd.append("file", e.target.files[0]);
+                              const res = await uploadPublicPhoto(fd);
+                              if (res.success) {
+                                const currentGaleri = school.galeriImages ? school.galeriImages.split(';').filter(Boolean) : [];
+                                currentGaleri.push(res.photoUrl);
+                                await updateSchoolPublicContent({ galeriImages: currentGaleri.join(';') });
+                                alert("Foto Galeri berhasil ditambahkan!");
+                                fetchDashboard();
+                              }
+                            }} />
+                            <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", marginTop: "0.5rem" }}>
+                              {school.galeriImages && school.galeriImages.split(';').filter(Boolean).map((img, i) => (
+                                <div key={i} style={{ position: "relative" }}>
+                                  <img src={img} alt="Galeri" style={{ width: "60px", height: "60px", objectFit: "cover" }} />
+                                  <button type="button" onClick={async () => {
+                                    if(confirm('Hapus foto ini?')) {
+                                      const arr = school.galeriImages.split(';').filter(Boolean);
+                                      arr.splice(i, 1);
+                                      await updateSchoolPublicContent({ galeriImages: arr.join(';') });
+                                      fetchDashboard();
+                                    }
+                                  }} style={{ position: "absolute", top: 0, right: 0, background: "red", color: "white", border: "none", cursor: "pointer", padding: "2px 5px", fontSize: "10px" }}>X</button>
+                                </div>
+                              ))}
+                            </div>
                           </div>
-
-                          <div className="form-group" style={{ marginTop: "1rem" }}>
-                            <label className="form-label">Kriteria Kelulusan Siswa</label>
-                            <textarea 
-                              className="form-textarea" 
-                              value={school.kriteriaLulus || ""} 
-                              onChange={(e) => setSchool(prev => ({ ...prev, kriteriaLulus: e.target.value }))}
-                              style={{ height: "60px" }}
-                            />
-                          </div>
-
-                          <h3 style={{ fontWeight: 800, color: "var(--primary-dark)", fontSize: "1.1rem", borderBottom: "2px solid var(--border-color)", paddingBottom: "0.25rem", marginTop: "2rem", marginBottom: "1rem" }}>🖼️ Halaman Galeri</h3>
-                          
-                          <div className="form-group">
-                            <label className="form-label">Daftar Link/Path Gambar Galeri (Pisahkan dengan titik koma ";")</label>
-                            <textarea 
-                              className="form-textarea" 
-                              value={school.galeriImages || ""} 
-                              onChange={(e) => setSchool(prev => ({ ...prev, galeriImages: e.target.value }))}
-                              style={{ height: "80px" }}
-                              placeholder="/hero_school.jpg; /facility_computer.jpg"
-                            />
-                          </div>
-
-                          <h3 style={{ fontWeight: 800, color: "var(--primary-dark)", fontSize: "1.1rem", borderBottom: "2px solid var(--border-color)", paddingBottom: "0.25rem", marginTop: "2rem", marginBottom: "1rem" }}>📞 Halaman Kontak</h3>
-
-                          <div className="form-group">
-                            <label className="form-label">Jam Pelayanan Informasi (PPDB Offline)</label>
-                            <input 
-                              type="text" 
-                              className="form-input" 
-                              value={school.jamPelayanan || ""} 
-                              onChange={(e) => setSchool(prev => ({ ...prev, jamPelayanan: e.target.value }))}
-                            />
-                          </div>
-
-                          <div className="form-group" style={{ marginTop: "1rem" }}>
-                            <label className="form-label">URL Embed Google Maps Iframe</label>
-                            <textarea 
-                              className="form-textarea" 
-                              value={school.googleMapsUrl || ""} 
-                              onChange={(e) => setSchool(prev => ({ ...prev, googleMapsUrl: e.target.value }))}
-                              style={{ height: "80px" }}
-                            />
-                          </div>
-
-                          <button type="submit" className="btn btn-primary" style={{ marginTop: "2.5rem", width: "100%" }}>
-                            💾 Simpan Seluruh Konten Publik
-                          </button>
                         </div>
-                      </form>
+                      </div>
                     ) : (
+
                       /* schoolSubTab === "absensi-setting" */
                       <div style={{ maxWidth: "800px" }}>
                         <div style={{ backgroundColor: "white", padding: "2rem", borderRadius: "var(--radius-md)", border: "1px solid var(--border-color)", marginBottom: "2rem", boxShadow: "var(--shadow-sm)" }}>
@@ -2543,7 +2450,15 @@ export default function PortalAdmin() {
 
                           <div className="form-group-row" style={{ marginTop: "1rem", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
                             <div className="form-group">
-                              <label className="form-label">Kelas / Tingkat Siswa *</label>
+                              
+  <div className="form-group" style={{marginTop: "1rem"}}>
+    <label className="form-label">Jurusan / Program</label>
+    <select className="form-select" value={newSiswa.jurusan || ''} onChange={e => setNewSiswa({...newSiswa, jurusan: e.target.value})}>
+      <option value="">-- Umum / Tanpa Jurusan --</option>
+      {majors.map(m => <option key={m.id} value={m.code}>{m.code} - {m.name}</option>)}
+    </select>
+  </div>
+  <label className="form-label">Kelas / Tingkat Siswa *</label>
                               <select 
                                 className="form-select"
                                 value={newSiswa.kelas}
@@ -2717,7 +2632,49 @@ export default function PortalAdmin() {
                 {activeTab === "perpustakaan" && <AdminPerpustakaan />}
 
                 {/* TAB 4: KELOLA MATA PELAJARAN */}
-                {activeTab === "mapel" && (
+                
+{activeTab === "jurusan" && (
+  <div>
+    <span style={{ fontSize: "0.85rem", textTransform: "uppercase", fontWeight: 700, color: "var(--secondary)" }}>Akademik</span>
+    <h2 style={{ fontSize: "1.75rem", fontWeight: 800, color: "var(--primary-dark)", marginBottom: "1.5rem" }}>Manajemen Jurusan</h2>
+    <div style={{ background: "#fff", borderRadius: "8px", padding: "1.5rem", border: "1px solid #e2e8f0", marginBottom: "2rem" }}>
+      <h4>Tambah Jurusan Baru</h4>
+      <div style={{ display: "flex", gap: "1rem", marginTop: "1rem" }}>
+        <input type="text" className="form-input" placeholder="Kode (Misal: DKV)" value={newMajor.code} onChange={e => setNewMajor({...newMajor, code: e.target.value})} />
+        <input type="text" className="form-input" placeholder="Nama Jurusan" value={newMajor.name} onChange={e => setNewMajor({...newMajor, name: e.target.value})} />
+        <button className="btn btn-primary" onClick={async () => {
+          if (!newMajor.code || !newMajor.name) return alert('Isi lengkap');
+          const r = await saveMajor(newMajor);
+          if (r.success) { alert('Tersimpan'); setNewMajor({code:'', name:''}); fetchDashboard(); }
+          else alert(r.error);
+        }}>Simpan Jurusan</button>
+      </div>
+    </div>
+    <div style={{ background: "#fff", borderRadius: "8px", border: "1px solid #e2e8f0" }}>
+      <table className="table" style={{ width: "100%" }}>
+        <thead><tr><th>Kode</th><th>Nama Jurusan</th><th>Aksi</th></tr></thead>
+        <tbody>
+          {majors.map(m => (
+            <tr key={m.id}>
+              <td>{m.code}</td>
+              <td>{m.name}</td>
+              <td>
+                <button className="btn btn-outline" style={{borderColor: "red", color: "red", padding: "0.2rem 0.5rem"}} onClick={async () => {
+                  if(confirm('Hapus?')) {
+                    await deleteMajor(m.id);
+                    fetchDashboard();
+                  }
+                }}>Hapus</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+)}
+
+{activeTab === "mapel" && (
                   <div>
                     <span style={{ fontSize: "0.85rem", textTransform: "uppercase", fontWeight: 700, color: "var(--secondary)" }}>Akademik</span>
                     <h2 style={{ fontSize: "1.75rem", fontWeight: 800, color: "var(--primary-dark)", marginBottom: "1.5rem" }}>

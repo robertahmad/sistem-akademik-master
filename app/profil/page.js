@@ -54,7 +54,7 @@ Hingga kini, Sekolah Master Demo telah meluluskan ratusan alumni yang telah berk
             </div>
           </div>
           <div className="hero-image-wrapper">
-            <img src="/hero_school.jpg" alt="Gedung Sekolah Master Demo" style={{ height: "350px", objectFit: "cover" }} />
+            <img src={school?.profilImage || "/hero_school.jpg"} alt="Gedung Sekolah Master Demo" style={{ height: "350px", objectFit: "cover" }} />
           </div>
         </div>
       </section>
