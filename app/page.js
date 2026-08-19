@@ -50,7 +50,7 @@ export default function Home() {
           position: relative;
           width: 100%;
           min-height: 100vh;
-          background-image: url('/image/bg-hero-jpg.png');
+          background-image: url('/image/bg-hero-new.jpg');
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
