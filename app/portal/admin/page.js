@@ -980,7 +980,7 @@ const [teachers, setTeachers] = useState([]);
           let password = String(getValueByHeader(["Password", "Kata Sandi"])).trim();
 
           if (!username) {
-            username = "siswa_" + (nisn || Math.random().toString(36).substring(2, 7));
+            username = nisn ? nisn : "siswa_" + Math.random().toString(36).substring(2, 7);
           }
           if (!password) {
             password = "123";
