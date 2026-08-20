@@ -244,6 +244,10 @@ export default function PortalSiswa() {
     } else {
       alert(`Maaf, belum ada soal ujian aktif untuk ${exam.category} ${exam.subject} Semester ${exam.semester}.`);
     }
+    } catch (e) {
+      console.error(e);
+      alert("Terjadi kesalahan saat menyiapkan ujian.");
+    }
   };
 
   // State selectors untuk 5 jenis tipe soal

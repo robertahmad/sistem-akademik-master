@@ -291,7 +291,11 @@ export async function getExamQuestions(subject, category, semester) {
       orderBy: { id: "asc" }
     });
 
-    const durationInSeconds = Math.max(0, Math.floor((new Date(schedule.endTime).getTime() - new Date(schedule.startTime).getTime()) / 1000));\n    const remainingUntilEnd = Math.max(0, Math.floor((new Date(schedule.endTime).getTime() - now.getTime()) / 1000));\n    // Jika admin membuka paksa (forceOpen), atau waktu mulai normal, kita beri batas max durasi atau waktu sisa.\n    const actualTimeLeft = schedule.forceOpen ? durationInSeconds : Math.min(durationInSeconds, remainingUntilEnd);\n    return { success: true, questions, timeLeft: actualTimeLeft || (90 * 60) };
+    const durationInSeconds = Math.max(0, Math.floor((new Date(schedule.endTime).getTime() - new Date(schedule.startTime).getTime()) / 1000));
+    const remainingUntilEnd = Math.max(0, Math.floor((new Date(schedule.endTime).getTime() - now.getTime()) / 1000));
+    // Jika admin membuka paksa (forceOpen), atau waktu mulai normal, kita beri batas max durasi atau waktu sisa.
+    const actualTimeLeft = schedule.forceOpen ? durationInSeconds : Math.min(durationInSeconds, remainingUntilEnd);
+    return { success: true, questions, timeLeft: actualTimeLeft || (90 * 60) };
   } catch (e) {
     console.error(e);
     return { success: false, error: "Gagal mengambil soal ujian." };
