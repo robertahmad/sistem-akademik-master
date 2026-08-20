@@ -3146,12 +3146,12 @@ const [teachers, setTeachers] = useState([]);
                               onChange={(e) => setNewJadwal(prev => ({ ...prev, semester: e.target.value }))}
                               required
                             >
-                              <option value="1">Semester 1 (Ganjil Kelas VII)</option>
-                              <option value="2">Semester 2 (Genap Kelas VII)</option>
-                              <option value="3">Semester 3 (Ganjil Kelas VIII)</option>
-                              <option value="4">Semester 4 (Genap Kelas VIII)</option>
-                              <option value="5">Semester 5 (Ganjil Kelas IX)</option>
-                              <option value="6">Semester 6 (Genap Kelas IX / PAJ)</option>
+                              <option value="1">Semester 1 (Ganjil Kelas X)</option>
+                              <option value="2">Semester 2 (Genap Kelas X)</option>
+                              <option value="3">Semester 3 (Ganjil Kelas XI)</option>
+                              <option value="4">Semester 4 (Genap Kelas XI)</option>
+                              <option value="5">Semester 5 (Ganjil Kelas XII)</option>
+                              <option value="6">Semester 6 (Genap Kelas XII)</option>
                             </select>
                           </div>
 
