@@ -322,6 +322,9 @@ model ExamSchedule {
   startTime   DateTime
   endTime     DateTime
   forceOpen   Boolean  @default(false) // Jika true, ujian dipaksa terbuka oleh admin
+    weightPG    Int      @default(100)
+    weightIsian Int      @default(0)
+    weightEssay Int      @default(0)
   createdAt   DateTime @default(now())
 
   @@unique([subjectName, category, semester])

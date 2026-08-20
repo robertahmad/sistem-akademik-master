@@ -589,7 +589,7 @@ export async function saveExamSchedule(data) {
       return { success: false, error: "Unauthorized" };
     }
 
-    const { subjectName, category, semester, startTime, endTime, forceOpen } = data;
+    const { subjectName, category, semester, startTime, endTime, forceOpen, weightPG = 100, weightIsian = 0, weightEssay = 0 } = data;
 
     // Fix Timezone: datetime-local string (YYYY-MM-DDTHH:mm) dikirim tanpa zona waktu. 
     // Vercel (server UTC) akan menganggapnya UTC, sehingga bergeser 7 jam. 
@@ -624,7 +624,10 @@ export async function saveExamSchedule(data) {
         data: {
           startTime: start,
           endTime: end,
-          forceOpen: Boolean(forceOpen)
+          forceOpen: Boolean(forceOpen),
+          weightPG: parseInt(weightPG),
+          weightIsian: parseInt(weightIsian),
+          weightEssay: parseInt(weightEssay)
         }
       });
     } else {
@@ -635,7 +638,10 @@ export async function saveExamSchedule(data) {
           semester: String(semester),
           startTime: start,
           endTime: end,
-          forceOpen: Boolean(forceOpen)
+          forceOpen: Boolean(forceOpen),
+          weightPG: parseInt(weightPG),
+          weightIsian: parseInt(weightIsian),
+          weightEssay: parseInt(weightEssay)
         }
       });
     }

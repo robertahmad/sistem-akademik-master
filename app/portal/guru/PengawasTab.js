@@ -17,7 +17,10 @@ export default function PengawasTab() {
     semester: "1",
     startTime: "",
     endTime: "",
-    forceOpen: false
+    forceOpen: false,
+    weightPG: 100,
+    weightIsian: 0,
+    weightEssay: 0
   });
   const [jadwalMessage, setJadwalMessage] = useState("");
   const [subjects, setSubjects] = useState([]);

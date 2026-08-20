@@ -6069,12 +6069,44 @@ export default function PortalGuru() {
                                               </>
                                             )}
 
+                                            
                                             {q.type === "ISIAN" && (
                                               <>
                                                 <div>Jawaban Siswa: <strong style={{ color: isCorrect ? "#22c55e" : "#ef4444" }}>{studentAns || "Tidak Dijawab"}</strong></div>
                                                 <div>Kunci Jawaban: <strong>{q.correctAnswer}</strong></div>
+                                                <div style={{ marginTop: "1rem", display: "flex", gap: "0.5rem", alignItems: "center", backgroundColor: "#fff7ed", padding: "0.5rem", borderRadius: "4px" }}>
+                                                  <label style={{ fontSize: "0.8rem", fontWeight: "bold", color: "#c2410c" }}>Koreksi Manual Isian (0-10):</label>
+                                                  <input 
+                                                    type="number" 
+                                                    className="form-input" 
+                                                    style={{ width: "80px", padding: "0.25rem", fontSize: "0.8rem" }}
+                                                    defaultValue={selectedSubmission.essayScores?.[q.id] ?? (isCorrect ? "10" : "0")}
+                                                    id={`isian-score-${q.id}`}
+                                                    min="0" max="10"
+                                                  />
+                                                  <button 
+                                                    type="button" 
+                                                    className="btn btn-primary"
+                                                    style={{ padding: "0.25rem 0.75rem", fontSize: "0.8rem", backgroundColor: "#ea580c", borderColor: "#ea580c" }}
+                                                    onClick={() => {
+                                                      const val = document.getElementById(`isian-score-${q.id}`).value;
+                                                      if(val !== "") {
+                                                        const num = parseInt(val, 10);
+                                                        if (num >= 0 && num <= 10) {
+                                                          handleSaveEssayScore(q.id, val);
+                                                        } else {
+                                                          alert("Nilai isian maksimal adalah 10");
+                                                        }
+                                                      }
+                                                      else alert("Nilai tidak boleh kosong");
+                                                    }}
+                                                  >
+                                                    Simpan Override
+                                                  </button>
+                                                </div>
                                               </>
                                             )}
+
 
                                             {q.type === "ESSAY" && (
                                               <>

@@ -295,7 +295,7 @@ export async function getExamQuestions(subject, category, semester) {
     const remainingUntilEnd = Math.max(0, Math.floor((new Date(schedule.endTime).getTime() - now.getTime()) / 1000));
     // Jika admin membuka paksa (forceOpen), atau waktu mulai normal, kita beri batas max durasi atau waktu sisa.
     const actualTimeLeft = schedule.forceOpen ? durationInSeconds : Math.min(durationInSeconds, remainingUntilEnd);
-    return { success: true, questions, timeLeft: actualTimeLeft || (90 * 60) };
+    return { success: true, questions, timeLeft: actualTimeLeft || (90 * 60), weights: { pg: schedule.weightPG ?? 100, isian: schedule.weightIsian ?? 0, essay: schedule.weightEssay ?? 0 } };
   } catch (e) {
     console.error(e);
     return { success: false, error: "Gagal mengambil soal ujian." };

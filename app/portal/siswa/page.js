@@ -34,6 +34,7 @@ export default function PortalSiswa() {
   const [financialData, setFinancialData] = useState(null);
   const [view, setView] = useState("dashboard"); // "dashboard", "exam", "success"
   const [activeExam, setActiveExam] = useState(null);
+  const [examWeights, setExamWeights] = useState({ pg: 100, isian: 0, essay: 0 });
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
   const [activeQuestionIdx, setActiveQuestionIdx] = useState(0);
@@ -85,7 +86,7 @@ export default function PortalSiswa() {
           if (nextTime <= 0) {
             clearInterval(timerRef.current);
             alert("Waktu ujian telah berakhir! Lembar jawaban dikumpulkan otomatis.");
-            submitExam(true, activeExam, questions);
+            submitExam(true, activeExam, questions, examWeights);
             return 0;
           }
           return nextTime;
@@ -110,7 +111,7 @@ export default function PortalSiswa() {
         setWarnings(prev => {
            const newWarn = prev + 1;
            if (newWarn >= 4) {
-              submitExam(true, activeExam, questions);
+              submitExam(true, activeExam, questions, examWeights);
               alert("Ujian Anda dihentikan paksa karena telah melanggar aturan keluar halaman sebanyak 4 kali.");
            } else {
               setShowWarningModal(true);
@@ -215,6 +216,7 @@ export default function PortalSiswa() {
       setStudentAnswerFile(null);
       setActiveQuestionIdx(0);
 
+      setExamWeights(res.weights || { pg: 100, isian: 0, essay: 0 });
       let initialTimeLeft = res.timeLeft || 5400; // Dinamis dari jadwal, fallback 90 menit
       let initialAnswers = {};
       let initialWarnings = 0;
@@ -515,7 +517,7 @@ export default function PortalSiswa() {
     );
   };
 
-  const submitExam = async (auto = false, targetExam = activeExam, targetQuestions = questions) => {
+  const submitExam = async (auto = false, targetExam = activeExam, targetQuestions = questions, targetWeights = examWeights) => {
     if (!auto) {
       if (!confirm("Apakah Anda yakin ingin menyerahkan semua jawaban ujian?")) return;
     }
@@ -528,50 +530,50 @@ export default function PortalSiswa() {
     } catch(e) {}
     localStorage.removeItem(getCacheKey(targetExam));
 
-    let correctCount = 0;
-    let gradedQuestionsCount = 0;
+    let pgCorrect = 0, pgTotal = 0;
+    let isianCorrect = 0, isianTotal = 0;
 
     targetQuestions.forEach((q) => {
       const studentAns = answers[q.id];
       
       if (q.type === "PG") {
-        gradedQuestionsCount++;
-        if (studentAns !== undefined && Number(studentAns) === q.correct) {
-          correctCount++;
-        }
+        pgTotal++;
+        if (studentAns !== undefined && Number(studentAns) === q.correct) pgCorrect++;
       } 
       else if (q.type === "PGK") {
-        gradedQuestionsCount++;
+        pgTotal++;
         if (Array.isArray(studentAns) && q.correctChoices) {
           const isCorrect = studentAns.length === q.correctChoices.length && 
                             studentAns.every(v => q.correctChoices.includes(Number(v)));
-          if (isCorrect) correctCount++;
+          if (isCorrect) pgCorrect++;
         }
       }
       else if (q.type === "MENJODOHKAN") {
-        gradedQuestionsCount++;
+        pgTotal++;
         if (studentAns && typeof studentAns === "object" && q.matchingLeft && q.matchingRight) {
           const allCorrect = q.matchingLeft.every((_, lIdx) => {
             const chosenRightIdx = studentAns[lIdx];
             if (chosenRightIdx === undefined) return false;
             return q.matchingRight[chosenRightIdx] === q.matchingRight[lIdx];
           });
-          if (allCorrect) correctCount++;
+          if (allCorrect) pgCorrect++;
         }
       }
       else if (q.type === "ISIAN") {
-        gradedQuestionsCount++;
-        if (studentAns && typeof studentAns === "string") {
+        isianTotal++;
+        if (studentAns && typeof studentAns === "string" && q.correctAnswer) {
           const isCorrect = studentAns.trim().toLowerCase() === q.correctAnswer.trim().toLowerCase();
-          if (isCorrect) correctCount++;
+          if (isCorrect) isianCorrect++;
         }
-      }
-      else if (q.type === "ESSAY") {
-        // Essay bersifat deskriptif, tetap disimpan tapi tidak dihitung ke nilai auto objektif.
       }
     });
 
-    const finalScore = gradedQuestionsCount > 0 ? Math.round((correctCount / gradedQuestionsCount) * 100) : 100;
+    let finalScore = 0;
+    const pgScore = pgTotal > 0 ? (pgCorrect / pgTotal) * targetWeights.pg : (targetWeights.pg === 100 ? 100 : 0);
+    const isianScore = isianTotal > 0 ? (isianCorrect / isianTotal) * targetWeights.isian : 0;
+    
+    // Essay score is always 0 initially.
+    finalScore = Math.round(pgScore + isianScore);
 
     // Jika siswa mengunggah lembar jawaban eksternal
     let studentFilePath = null;

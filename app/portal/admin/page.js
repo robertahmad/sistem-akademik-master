@@ -142,7 +142,10 @@ const [teachers, setTeachers] = useState([]);
     semester: "1",
     startTime: "",
     endTime: "",
-    forceOpen: false
+    forceOpen: false,
+    weightPG: 100,
+    weightIsian: 0,
+    weightEssay: 0
   });
   const [jadwalMessage, setJadwalMessage] = useState("");
 
@@ -2808,7 +2811,24 @@ const [teachers, setTeachers] = useState([]);
                             />
                           </div>
 
+                          
+                          <div className="form-group-row" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1rem", marginTop: "1rem", backgroundColor: "#f8fafc", padding: "1rem", borderRadius: "8px", border: "1px solid #e2e8f0" }}>
+                            <div className="form-group" style={{ marginBottom: 0 }}>
+                              <label className="form-label" style={{ fontSize: "0.8rem" }}>Bobot Pilihan Ganda (%)</label>
+                              <input type="number" min="0" max="100" className="form-input" value={newJadwal.weightPG} onChange={(e) => setNewJadwal(prev => ({ ...prev, weightPG: parseInt(e.target.value) || 0 }))} />
+                            </div>
+                            <div className="form-group" style={{ marginBottom: 0 }}>
+                              <label className="form-label" style={{ fontSize: "0.8rem" }}>Bobot Isian Singkat (%)</label>
+                              <input type="number" min="0" max="100" className="form-input" value={newJadwal.weightIsian} onChange={(e) => setNewJadwal(prev => ({ ...prev, weightIsian: parseInt(e.target.value) || 0 }))} />
+                            </div>
+                            <div className="form-group" style={{ marginBottom: 0 }}>
+                              <label className="form-label" style={{ fontSize: "0.8rem" }}>Bobot Essay (%)</label>
+                              <input type="number" min="0" max="100" className="form-input" value={newJadwal.weightEssay} onChange={(e) => setNewJadwal(prev => ({ ...prev, weightEssay: parseInt(e.target.value) || 0 }))} />
+                            </div>
+                          </div>
+
                           <div className="form-group" style={{ marginTop: "1.5rem" }}>
+
                             <label className="form-label" style={{ fontWeight: 700 }}>Pengaturan Capaian Pembelajaran (Target Rapor)</label>
                             
                             <div style={{ marginTop: "0.5rem", marginBottom: "1rem" }}>

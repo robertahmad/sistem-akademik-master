@@ -472,69 +472,94 @@ export async function saveEssayScore(submissionId, questionId, essayScoreVal) {
     essayScores[questionId] = parseInt(essayScoreVal, 10);
 
     // 2. Recalculate Final Score
+
+    const student = await prisma.student.findUnique({
+      where: { nisn: submission.studentNisn }
+    });
+    
+    let gradeLevel = "X";
+    if (student) {
+      const normKelas = (student.kelas || "").trim().toLowerCase();
+      if (normKelas.startsWith("viii") || normKelas.includes("kelas xi") || normKelas.includes("kelas 8") || normKelas.startsWith("8") || /\bxi\b/.test(normKelas)) {
+        gradeLevel = "XI";
+      } else if (normKelas.startsWith("ix") || normKelas.includes("kelas xii") || normKelas.includes("kelas 9") || normKelas.startsWith("9") || /\bxii\b/.test(normKelas)) {
+        gradeLevel = "XII";
+      }
+    }
+
     const questions = await prisma.question.findMany({
       where: {
         subject: submission.subjectName,
         category: submission.category,
+        semester: submission.semester,
+        kelas: gradeLevel
+      }
+    });
+
+
+    
+    const schedule = await prisma.examSchedule.findFirst({
+      where: {
+        subjectName: submission.subjectName,
+        category: submission.category,
         semester: submission.semester
       }
     });
+    const weightPG = schedule ? schedule.weightPG : 100;
+    const weightIsian = schedule ? schedule.weightIsian : 0;
+    const weightEssay = schedule ? schedule.weightEssay : 0;
 
-    let correctCount = 0;
-    let gradedQuestionsCount = 0;
-    let essayCount = 0;
-    let totalEssayScore = 0;
+    let pgCorrect = 0, pgTotal = 0;
+    let isianCorrect = 0, isianTotal = 0;
+    let essayTotal = 0, essayScoreAccum = 0;
+
     const answers = submission.answers && typeof submission.answers === "object" ? submission.answers : {};
 
     questions.forEach((q) => {
+      const studentAns = answers[q.id];
       if (q.type === "ESSAY") {
-        essayCount++;
+        essayTotal++;
         if (essayScores[q.id] !== undefined) {
-          totalEssayScore += essayScores[q.id];
+          essayScoreAccum += essayScores[q.id];
         }
-      } else {
-        const studentAns = answers[q.id];
-        if (q.type === "PG") {
-          gradedQuestionsCount++;
-          if (studentAns !== undefined && Number(studentAns) === q.correct) correctCount++;
-        } else if (q.type === "PGK") {
-          gradedQuestionsCount++;
-          if (Array.isArray(studentAns) && q.correctChoices) {
-            const isCorrect = studentAns.length === q.correctChoices.length && 
-                              studentAns.every(v => q.correctChoices.includes(Number(v)));
-            if (isCorrect) correctCount++;
-          }
-        } else if (q.type === "MENJODOHKAN") {
-          gradedQuestionsCount++;
-          if (studentAns && typeof studentAns === "object" && q.matchingLeft && q.matchingRight) {
-            const allCorrect = q.matchingLeft.every((_, lIdx) => {
-              const chosenRightIdx = studentAns[lIdx];
-              if (chosenRightIdx === undefined) return false;
-              return q.matchingRight[chosenRightIdx] === q.matchingRight[lIdx];
-            });
-            if (allCorrect) correctCount++;
-          }
-        } else if (q.type === "ISIAN") {
-          gradedQuestionsCount++;
-          if (studentAns && typeof studentAns === "string") {
-            const isCorrect = studentAns.trim().toLowerCase() === (q.correctAnswer || "").trim().toLowerCase();
-            if (isCorrect) correctCount++;
-          }
+      } else if (q.type === "ISIAN") {
+        isianTotal++;
+        if (essayScores[q.id] !== undefined) {
+          isianCorrect += (essayScores[q.id] / 10); // Nilai manual maks 10 (jadi disetarakan 0-1 untuk proporsi)
+        } else if (studentAns && typeof studentAns === "string") {
+          const isCorrect = studentAns.trim().toLowerCase() === (q.correctAnswer || "").trim().toLowerCase();
+          if (isCorrect) isianCorrect++;
+        }
+      } else if (q.type === "PG") {
+        pgTotal++;
+        if (studentAns !== undefined && Number(studentAns) === q.correct) pgCorrect++;
+      } else if (q.type === "PGK") {
+        pgTotal++;
+        if (Array.isArray(studentAns) && q.correctChoices) {
+          const isCorrect = studentAns.length === q.correctChoices.length && 
+                            studentAns.every(v => q.correctChoices.includes(Number(v)));
+          if (isCorrect) pgCorrect++;
+        }
+      } else if (q.type === "MENJODOHKAN") {
+        pgTotal++;
+        if (studentAns && typeof studentAns === "object" && q.matchingLeft && q.matchingRight) {
+          const allCorrect = q.matchingLeft.every((_, lIdx) => {
+            const chosenRightIdx = studentAns[lIdx];
+            if (chosenRightIdx === undefined) return false;
+            return q.matchingRight[chosenRightIdx] === q.matchingRight[lIdx];
+          });
+          if (allCorrect) pgCorrect++;
         }
       }
     });
 
-    const objScore = gradedQuestionsCount > 0 ? Math.round((correctCount / gradedQuestionsCount) * 100) : null;
-    const avgEssayScore = essayCount > 0 ? Math.round(totalEssayScore / essayCount) : null;
+    const pgScore = pgTotal > 0 ? (pgCorrect / pgTotal) * weightPG : (weightPG === 100 ? 100 : 0);
+    const isianScore = isianTotal > 0 ? (isianCorrect / isianTotal) * weightIsian : 0;
+    const avgEssay = essayTotal > 0 ? (essayScoreAccum / essayTotal) : 0; // 0-100
+    const essayScorePart = essayTotal > 0 ? (avgEssay / 100) * weightEssay : 0;
 
-    let finalScore = submission.score; // fallback
-    if (objScore !== null && avgEssayScore !== null) {
-      finalScore = Math.round((objScore + avgEssayScore) / 2);
-    } else if (objScore !== null) {
-      finalScore = objScore;
-    } else if (avgEssayScore !== null) {
-      finalScore = avgEssayScore;
-    }
+    const finalScore = Math.round(pgScore + isianScore + essayScorePart);
+
 
     const updatedSubmission = await prisma.examSubmission.update({
       where: { id: submissionId },
