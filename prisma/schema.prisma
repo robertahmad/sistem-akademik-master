@@ -95,6 +95,7 @@ model Teacher {
   isWakaKurikulum  Boolean  @default(false)
   isWakaKesiswaan  Boolean  @default(false)
   isKaprodiDkv     Boolean  @default(false)
+  isPengawas       Boolean  @default(false)
   jamMengajar      Int      @default(0)
   jabatan          String   @default("-")
   customInsentifRate Int?   // Tarif insentif khusus (opsional)

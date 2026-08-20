@@ -53,7 +53,7 @@ export async function assignSpecialRole(teacherId, roleField, value) {
     }
 
     // Hanya izinkan field tertentu
-    if (!["isTU", "isPerpus", "isSarpras", "isWakaKurikulum", "isWakaKesiswaan", "isKaprodiDkv"].includes(roleField)) {
+    if (!["isTU", "isPerpus", "isSarpras", "isWakaKurikulum", "isWakaKesiswaan", "isKaprodiDkv", "isPengawas"].includes(roleField)) {
       return { success: false, error: "Invalid role field" };
     }
 

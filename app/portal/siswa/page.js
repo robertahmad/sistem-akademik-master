@@ -101,8 +101,12 @@ export default function PortalSiswa() {
   useEffect(() => {
     if (view !== 'exam') return;
 
+    let lastWarnTime = 0;
     const handleVisibilityChange = () => {
       if (document.hidden) {
+        const now = Date.now();
+        if (now - lastWarnTime < 2000) return;
+        lastWarnTime = now;
         setWarnings(prev => {
            const newWarn = prev + 1;
            if (newWarn >= 4) {
@@ -192,6 +196,7 @@ export default function PortalSiswa() {
 
   // Ujian Logic
   const startExam = async (exam) => {
+    try {
     setActiveExam(exam);
     const res = await getExamQuestions(exam.subject, exam.category, exam.semester);
     if (res.success && res.questions.length > 0) {
@@ -210,7 +215,7 @@ export default function PortalSiswa() {
       setStudentAnswerFile(null);
       setActiveQuestionIdx(0);
 
-      let initialTimeLeft = 1200; // 20 menit
+      let initialTimeLeft = res.timeLeft || 5400; // Dinamis dari jadwal, fallback 90 menit
       let initialAnswers = {};
       let initialWarnings = 0;
 
@@ -1530,6 +1535,25 @@ export default function PortalSiswa() {
         </div>
       </div>
 
+
+      
+      {/* Modal Peringatan Anti-Cheat */}
+      {showWarningModal && (
+        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, backgroundColor: "rgba(0,0,0,0.8)", zIndex: 9999, display: "flex", alignItems: "center", justifyContent: "center", padding: "1rem" }}>
+          <div style={{ backgroundColor: "white", borderRadius: "var(--radius-md)", width: "100%", maxWidth: "450px", padding: "2rem", boxShadow: "var(--shadow-lg)", textAlign: "center", borderTop: "5px solid #ef4444" }}>
+            <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>⚠️</div>
+            <h3 style={{ margin: 0, color: "#ef4444", fontWeight: 800, fontSize: "1.25rem", marginBottom: "1rem" }}>PERINGATAN PELANGGARAN!</h3>
+            <p style={{ color: "var(--text-main)", marginBottom: "1.5rem", lineHeight: "1.5" }}>
+              Anda terdeteksi meninggalkan halaman ujian (pindah tab atau membuka aplikasi lain).<br/><br/>
+              Ini adalah peringatan ke-<strong>{warnings}</strong> dari maksimal 3 peringatan.<br/>
+              Jika Anda melanggar sebanyak 4 kali, ujian akan dihentikan secara otomatis!
+            </p>
+            <button className="btn btn-primary" style={{ width: "100%", backgroundColor: "#ef4444", borderColor: "#ef4444" }} onClick={() => setShowWarningModal(false)}>
+              Saya Mengerti & Kembali ke Ujian
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Modal Unggah Portofolio */}
       {showPortfolioModal && (

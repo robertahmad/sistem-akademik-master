@@ -579,7 +579,13 @@ export async function updateStudentPassword(id, newPassword) {
 export async function saveExamSchedule(data) {
   try {
     const session = await getSession();
-    if (!session || session.role !== "admin") {
+    let isAuthorized = false;
+    if (session && session.role === "admin") isAuthorized = true;
+    if (session && (session.role === "guru-mapel" || session.role === "wali-kelas")) {
+      const teacher = await prisma.teacher.findUnique({ where: { id: session.id } });
+      if (teacher && teacher.isPengawas) isAuthorized = true;
+    }
+    if (!isAuthorized) {
       return { success: false, error: "Unauthorized" };
     }
 
@@ -644,7 +650,13 @@ export async function saveExamSchedule(data) {
 export async function deleteExamSchedule(id) {
   try {
     const session = await getSession();
-    if (!session || session.role !== "admin") {
+    let isAuthorized = false;
+    if (session && session.role === "admin") isAuthorized = true;
+    if (session && (session.role === "guru-mapel" || session.role === "wali-kelas")) {
+      const teacher = await prisma.teacher.findUnique({ where: { id: session.id } });
+      if (teacher && teacher.isPengawas) isAuthorized = true;
+    }
+    if (!isAuthorized) {
       return { success: false, error: "Unauthorized" };
     }
 

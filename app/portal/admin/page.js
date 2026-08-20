@@ -2053,7 +2053,16 @@ const [teachers, setTeachers] = useState([]);
 
                           <div className="form-group-row" style={{ marginTop: "1rem", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
                             <div className="form-group">
-                              <label className="form-label">Peran Pendidik</label>
+                              <label style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.9rem", cursor: "pointer", padding: "0.75rem", backgroundColor: "#fffbeb", border: "1px solid #fcd34d", borderRadius: "0.5rem", color: "#b45309", fontWeight: "bold", marginBottom: "1rem" }}>
+    <input 
+      type="checkbox" 
+      checked={newGuru.isPengawas || false}
+      onChange={(e) => setNewGuru(prev => ({ ...prev, isPengawas: e.target.checked }))}
+      style={{ width: "1.2rem", height: "1.2rem" }}
+    />
+    Jadikan Sebagai Pengawas Ujian CBT
+  </label>
+  <label className="form-label">Peran Pendidik</label>
                               <select 
                                 className="form-select"
                                 value={newGuru.role}
@@ -4557,6 +4566,15 @@ const [teachers, setTeachers] = useState([]);
               <div className="form-group" style={{ marginTop: "1rem" }}>
                 <label className="form-label">Tugas Pembina Ekstrakurikuler (Opsional)</label>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.5rem", backgroundColor: "var(--bg-alt)", padding: "0.75rem", borderRadius: "var(--radius-md)", border: "1px solid var(--border-color)", maxHeight: "120px", overflowY: "auto" }}>
+                  <label style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.85rem", cursor: "pointer", marginTop: "1rem", color: "#d97706", fontWeight: "bold" }}>
+                    <input 
+                      type="checkbox" 
+                      checked={editingGuru.isPengawas || false}
+                      onChange={(e) => setEditingGuru(prev => ({ ...prev, isPengawas: e.target.checked }))}
+                    />
+                    Jadikan Pengawas Ujian CBT
+                  </label>
+                  <hr style={{ margin: "1rem 0", borderColor: "var(--border-color)" }} />
                   {extracurriculars.map((ekskul) => (
                     <label key={ekskul.id} style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.85rem", cursor: "pointer" }}>
                       <input 
