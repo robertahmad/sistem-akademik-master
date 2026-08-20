@@ -280,6 +280,7 @@ export async function addStudent(studentData) {
           nis: studentData.nis || "-",
           jenisKelamin: studentData.jenisKelamin || "",
           kelas: studentData.kelas || "",
+          jurusan: studentData.jurusan || "",
           alamat: studentData.alamat || "",
           namaOrangTua: studentData.namaOrangTua || "",
           namaAyah: studentData.namaAyah || "",

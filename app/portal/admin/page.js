@@ -879,18 +879,18 @@ const [teachers, setTeachers] = useState([]);
   // Unduh Template Excel Siswa
   const unduhTemplateExcel = () => {
     const headers = [
-      ["Nama Lengkap", "NIS", "NISN", "Jenis Kelamin", "Tempat Lahir", "Tanggal Lahir (YYYY-MM-DD)", "Nama Orang Tua / Wali", "Nama Ayah", "Nama Ibu", "Pekerjaan Ayah", "Pekerjaan Ibu", "Asal Sekolah", "Tanggal Masuk Sekolah (YYYY-MM-DD)", "Kelas", "Alamat Siswa", "Username Login", "Password"]
+      ["Nama Lengkap", "NIS", "NISN", "Jenis Kelamin", "Tempat Lahir", "Tanggal Lahir (YYYY-MM-DD)", "Nama Orang Tua / Wali", "Nama Ayah", "Nama Ibu", "Pekerjaan Ayah", "Pekerjaan Ibu", "Asal Sekolah", "Tanggal Masuk Sekolah (YYYY-MM-DD)", "Kelas", "Jurusan", "Alamat Siswa", "Username Login", "Password"]
     ];
     const sampleData = [
-      ["Rani Wijaya", "24001", "0081234567", "Perempuan", "Magelang", "2011-05-12", "Slamet Wijaya", "Slamet Wijaya", "Sumarni", "Wiraswasta", "Ibu Rumah Tangga", "SD N 1 Kota Demo", "2024-07-15", "X DKV", "Dusun Ngablak RT 02", "rani", "123"],
-      ["Diki Hermawan", "24002", "0087654321", "Laki-laki", "Magelang", "2011-08-20", "Budi Hermawan", "Budi Hermawan", "Siti Aminah", "Petani", "Petani", "MI Master Demo", "2024-07-15", "XI DKV", "Dusun Ngabean RT 03", "diki", "123"]
+      ["Rani Wijaya", "24001", "0081234567", "Perempuan", "Magelang", "2011-05-12", "Slamet Wijaya", "Slamet Wijaya", "Sumarni", "Wiraswasta", "Ibu Rumah Tangga", "SD N 1 Kota Demo", "2024-07-15", "X DKV", "Desain Komunikasi Visual", "Dusun Ngablak RT 02", "rani", "123"],
+      ["Diki Hermawan", "24002", "0087654321", "Laki-laki", "Magelang", "2011-08-20", "Budi Hermawan", "Budi Hermawan", "Siti Aminah", "Petani", "Petani", "MI Master Demo", "2024-07-15", "XI DKV", "Desain Komunikasi Visual", "Dusun Ngabean RT 03", "diki", "123"]
     ];
 
     const wsData = headers.concat(sampleData);
     const ws = XLSX.utils.aoa_to_sheet(wsData);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Data Siswa");
-    XLSX.writeFile(wb, "template_siswa_smk_alqodiriyah.xlsx");
+    XLSX.writeFile(wb, `template_siswa_${school?.nama ? school.nama.replace(/\s+/g, '_').toLowerCase() : 'demo'}.xlsx`);
   };
 
   // Impor Excel Siswa
@@ -973,6 +973,7 @@ const [teachers, setTeachers] = useState([]);
           const tanggalMasuk = formatExcelDate(rawTglMasuk);
 
           const kelas = String(getValueByHeader(["Kelas", "Tingkat Kelas"])).trim() || "X DKV";
+          const jurusan = String(getValueByHeader(["Jurusan", "Program Keahlian"])).trim();
           const alamat = String(getValueByHeader(["Alamat Siswa", "Alamat"])).trim();
           
           let username = String(getValueByHeader(["Username Login", "Username"])).trim();
@@ -1000,6 +1001,7 @@ const [teachers, setTeachers] = useState([]);
             asalSekolah,
             tanggalMasuk,
             kelas,
+            jurusan,
             alamat,
             username,
             password
