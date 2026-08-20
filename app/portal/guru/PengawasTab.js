@@ -6,7 +6,7 @@ import {
   deleteExamSchedule, 
   toggleForceOpen,
   resetStudentExam,
-  getAdminDashboardData
+  getAdminDashboard
 } from "../../actions/admin";
 
 export default function PengawasTab() {
@@ -24,7 +24,7 @@ export default function PengawasTab() {
 
   // Fetch schedules manually by hitting admin dashboard data or a specific endpoint
   const loadData = async () => {
-    const res = await getAdminDashboardData();
+    const res = await getAdminDashboard();
     if (res.success) {
       setExamSchedules(res.examSchedules || []);
       setSubjects(res.subjects || []);

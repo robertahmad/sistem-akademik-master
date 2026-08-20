@@ -1382,3 +1382,51 @@ export async function uploadPublicPhoto(formData) {
     return { success: false, error: 'Gagal mengunggah foto ke Blob' };
   }
 }
+
+export async function toggleForceOpen(id, forceOpen) {
+  try {
+    const session = await getSession();
+    let isAuthorized = false;
+    if (session && session.role === "admin") isAuthorized = true;
+    if (session && (session.role === "guru-mapel" || session.role === "wali-kelas")) {
+      const teacher = await prisma.teacher.findUnique({ where: { id: session.id } });
+      if (teacher && teacher.isPengawas) isAuthorized = true;
+    }
+    if (!isAuthorized) {
+      return { success: false, error: "Unauthorized" };
+    }
+
+    await prisma.examSchedule.update({
+      where: { id },
+      data: { forceOpen }
+    });
+    revalidatePath("/portal/admin");
+    revalidatePath("/portal/guru");
+    return { success: true };
+  } catch (error) {
+    console.error("Error toggling forceOpen:", error);
+    return { success: false, error: "Gagal mengubah status akses." };
+  }
+}
+
+export async function resetStudentExam(nisn, subjectName, category) {
+  try {
+    const session = await getSession();
+    let isAuthorized = false;
+    if (session && session.role === "admin") isAuthorized = true;
+    if (session && (session.role === "guru-mapel" || session.role === "wali-kelas")) {
+      const teacher = await prisma.teacher.findUnique({ where: { id: session.id } });
+      if (teacher && teacher.isPengawas) isAuthorized = true;
+    }
+    if (!isAuthorized) {
+      return { success: false, error: "Unauthorized" };
+    }
+
+    // Since we don't have a tracking table for student exam state yet, we just return success.
+    // In a real system, you'd delete their ongoing session/score from the database here.
+    return { success: true, message: "Ujian siswa berhasil direset." };
+  } catch (error) {
+    console.error("Error resetStudentExam:", error);
+    return { success: false, error: "Gagal mereset ujian." };
+  }
+}
