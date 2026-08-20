@@ -585,8 +585,14 @@ export async function saveExamSchedule(data) {
 
     const { subjectName, category, semester, startTime, endTime, forceOpen } = data;
 
-    const start = new Date(startTime);
-    const end = new Date(endTime);
+    // Fix Timezone: datetime-local string (YYYY-MM-DDTHH:mm) dikirim tanpa zona waktu. 
+    // Vercel (server UTC) akan menganggapnya UTC, sehingga bergeser 7 jam. 
+    // Kita tambahkan +07:00 agar dibaca sebagai WIB.
+    const startString = startTime.length === 16 ? startTime + "+07:00" : startTime;
+    const endString = endTime.length === 16 ? endTime + "+07:00" : endTime;
+    
+    const start = new Date(startString);
+    const end = new Date(endString);
 
     if (isNaN(start.getTime()) || isNaN(end.getTime())) {
       return { success: false, error: "Tanggal mulai atau selesai tidak valid." };
