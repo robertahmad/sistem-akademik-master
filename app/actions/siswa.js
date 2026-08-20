@@ -46,11 +46,21 @@ export async function getStudentDashboardData() {
     // Ambil tingkat kelas romawi
     const gradeLevel = level === 7 ? "X" : level === 8 ? "XI" : "XII";
 
-    // Ambil soal yang aktif untuk semester ini dan tingkat kelas ini
+    // Ambil daftar mata pelajaran untuk memfilter berdasarkan jurusan siswa
+    const allSubjects = await prisma.subject.findMany();
+    const studentJurusan = (student.jurusan || "").trim();
+    
+    // Mata pelajaran yang diizinkan: jurusan kosong (umum) atau jurusan sama dengan jurusan siswa
+    const validSubjectNames = allSubjects
+      .filter(s => !s.jurusan || s.jurusan.trim() === "" || s.jurusan.trim() === studentJurusan)
+      .map(s => s.name);
+
+    // Ambil soal yang aktif untuk semester ini dan tingkat kelas ini, serta sesuai jurusan
     const activeSemesterQuestions = await prisma.question.findMany({
       where: { 
         semester: activeSemester,
-        kelas: gradeLevel
+        kelas: gradeLevel,
+        subject: { in: validSubjectNames }
       }
     });
 
