@@ -3579,7 +3579,7 @@ export default function PortalGuru() {
                         </div>
                         
                         <div className="form-group-row" style={{ marginTop: "1rem" }}>
-                          {checkIsOnline(school?.utsMode, selectedStudent?.kelas, "online") ? (
+                          {checkIsOnline(school?.utsMode, students.find(s => s.nisn === selectedStudentNisn)?.kelas, "online") ? (
                             <div className="form-group">
                               <label className="form-label">Nilai UTS (Ujian Online)</label>
                               <input 
@@ -3610,7 +3610,7 @@ export default function PortalGuru() {
                             </div>
                           )}
 
-                          {checkIsOnline(school?.uasMode, selectedStudent?.kelas, "offline") ? (
+                          {checkIsOnline(school?.uasMode, students.find(s => s.nisn === selectedStudentNisn)?.kelas, "offline") ? (
                             <div className="form-group" style={{ marginLeft: "1rem" }}>
                               <label className="form-label">Nilai UAS (Ujian Online)</label>
                               <input 
@@ -3644,7 +3644,7 @@ export default function PortalGuru() {
 
                         {selectedSemester === "6" && (
                           <div className="form-group-row" style={{ marginTop: "1rem" }}>
-                            {checkIsOnline(school?.pajMode, selectedStudent?.kelas, "offline") ? (
+                            {checkIsOnline(school?.pajMode, students.find(s => s.nisn === selectedStudentNisn)?.kelas, "offline") ? (
                               <div className="form-group" style={{ width: "100%" }}>
                                 <label className="form-label">Nilai PAJ (Ujian Online)</label>
                                 <input 
