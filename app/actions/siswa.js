@@ -11,16 +11,18 @@ function checkIsOffline(modeString, studentKelas, defaultMode) {
     const parsed = JSON.parse(modeString);
     const normalizedKelas = (studentKelas || "").trim().toLowerCase();
     
-    // Cari mapping kelas yang cocok (misal: "X", "XI", "XII" atau "X DKV")
-    for (const key in parsed) {
-      if (normalizedKelas.includes(key.toLowerCase())) {
+    // Sort keys by length descending so "XII" is checked before "XI" and "X"
+    const keys = Object.keys(parsed).sort((a, b) => b.length - a.length);
+    for (const key of keys) {
+      // Use word boundary to ensure we match exactly "X", "XI", "XII"
+      const regex = new RegExp('\\b' + key.toLowerCase() + '\\b');
+      if (regex.test(normalizedKelas)) {
         return parsed[key] === "offline";
       }
     }
     
     if (parsed["GLOBAL"]) return parsed["GLOBAL"] === "offline";
   } catch (e) {
-    // Jika bukan JSON, cek string langsung
     return modeString.toLowerCase() === "offline";
   }
   return defaultMode === "offline";
@@ -54,11 +56,23 @@ export async function getStudentDashboardData() {
 
     // Hitung semester aktif siswa berdasarkan kelas dan semester aktif sekolah
     const normKelas = (student.kelas || "").trim().toLowerCase();
-    let level = 7;
-    if (normKelas.startsWith("viii") || normKelas.includes("kelas xi") || normKelas.includes("kelas 8") || normKelas.startsWith("8")) {
-      level = 8;
-    } else if (normKelas.startsWith("ix") || normKelas.includes("kelas xii") || normKelas.includes("kelas 9") || normKelas.startsWith("9")) {
-      level = 9;
+    let level = 7; // X (SMK) / VII (SMP)
+    if (
+      normKelas.startsWith("viii") || 
+      normKelas.includes("kelas xi") || 
+      normKelas.includes("kelas 8") || 
+      normKelas.startsWith("8") || 
+      /\bxi\b/.test(normKelas)
+    ) {
+      level = 8; // XI (SMK) / VIII (SMP)
+    } else if (
+      normKelas.startsWith("ix") || 
+      normKelas.includes("kelas xii") || 
+      normKelas.includes("kelas 9") || 
+      normKelas.startsWith("9") || 
+      /\bxii\b/.test(normKelas)
+    ) {
+      level = 9; // XII (SMK) / IX (SMP)
     }
     const isGanjil = (school.semester || "Ganjil").toLowerCase().trim() === "ganjil";
     let activeSemester = "1";
@@ -249,9 +263,21 @@ export async function getExamQuestions(subject, category, semester) {
 
     const normKelas = (student.kelas || "").trim().toLowerCase();
     let gradeLevel = "X";
-    if (normKelas.startsWith("viii") || normKelas.includes("kelas xi") || normKelas.includes("kelas 8") || normKelas.startsWith("8")) {
+    if (
+      normKelas.startsWith("viii") || 
+      normKelas.includes("kelas xi") || 
+      normKelas.includes("kelas 8") || 
+      normKelas.startsWith("8") || 
+      /\bxi\b/.test(normKelas)
+    ) {
       gradeLevel = "XI";
-    } else if (normKelas.startsWith("ix") || normKelas.includes("kelas xii") || normKelas.includes("kelas 9") || normKelas.startsWith("9")) {
+    } else if (
+      normKelas.startsWith("ix") || 
+      normKelas.includes("kelas xii") || 
+      normKelas.includes("kelas 9") || 
+      normKelas.startsWith("9") || 
+      /\bxii\b/.test(normKelas)
+    ) {
       gradeLevel = "XII";
     }
 
