@@ -219,6 +219,27 @@ function getKelasForSemester(currentKelas, targetSemester) {
   return `${levelRomawi}-${suffix}`;
 }
 
+
+
+// Helper untuk mengecek mode akses ujian
+const checkIsOnline = (modeStr, kelasRaw, fallback) => {
+  if (!modeStr) return fallback === "online";
+  let kelasPrefix = "X";
+  if (kelasRaw && typeof kelasRaw === "string") {
+    if (kelasRaw.startsWith("XII")) kelasPrefix = "XII";
+    else if (kelasRaw.startsWith("XI")) kelasPrefix = "XI";
+  }
+  try {
+    if (modeStr.startsWith("{")) {
+      const parsed = JSON.parse(modeStr);
+      return parsed[kelasPrefix] === "online";
+    }
+    return modeStr === "online";
+  } catch(e) {
+    return fallback === "online";
+  }
+};
+
 export default function PortalGuru() {
   const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(true);
