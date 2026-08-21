@@ -219,7 +219,8 @@ export async function addTeacher(teacherData) {
         password: hashedPassword,
         jabatan: teacherData.jabatan || "-",
         tunjangan: cleanTunjangan,
-        customInsentif: cleanCustomInsentif
+        customInsentif: cleanCustomInsentif,
+        isPengawas: Boolean(teacherData.isPengawas)
       }
     });
 
@@ -810,7 +811,8 @@ export async function updateTeacher(id, teacherData) {
         username: teacherData.username,
         jabatan: teacherData.jabatan || "-",
         tunjangan: cleanTunjangan,
-        customInsentif: cleanCustomInsentif
+        customInsentif: cleanCustomInsentif,
+        isPengawas: Boolean(teacherData.isPengawas)
       }
     });
 
