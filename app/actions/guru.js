@@ -596,8 +596,7 @@ export async function saveEssayScore(submissionId, questionId, essayScoreVal) {
           studentNisn: updatedSubmission.studentNisn,
           subjectName: updatedSubmission.subjectName,
           semester: updatedSubmission.semester,
-          tugas1: 80,
-          tugas2: 80,
+          
           ...updateData
         }
       });

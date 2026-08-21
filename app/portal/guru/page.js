@@ -962,22 +962,8 @@ export default function PortalGuru() {
     if (!student) return;
 
     let finalUts = uts;
-    if (checkIsOnline(school?.utsMode, student?.kelas || studentData?.kelas, "online")) {
-      const sub = student.examSubmissions?.find(es => es.subjectName === activeSubject?.name && es.category === "UTS" && es.semester === selectedSemester);
-      finalUts = sub ? sub.score : null;
-    }
-
     let finalUas = uas;
-    if (checkIsOnline(school?.uasMode, student?.kelas || studentData?.kelas, "offline")) {
-      const sub = student.examSubmissions?.find(es => es.subjectName === activeSubject?.name && es.category === "UAS" && es.semester === selectedSemester);
-      finalUas = sub ? sub.score : null;
-    }
-
     let finalPaj = paj;
-    if (checkIsOnline(school?.pajMode, student?.kelas || studentData?.kelas, "offline")) {
-      const sub = student.examSubmissions?.find(es => es.subjectName === activeSubject?.name && es.category === "PAJ" && es.semester === selectedSemester);
-      finalPaj = sub ? sub.score : null;
-    }
 
     const res = await saveStudentGrade(
       selectedStudentNisn,
@@ -2028,28 +2014,8 @@ export default function PortalGuru() {
       
       // Dapatkan nilai ujian online jika mode ujian diatur ke online
       let finalUtsValue = existingGrade && existingGrade.uts !== null ? existingGrade.uts : "";
-      if (checkIsOnline(school?.utsMode, student?.kelas || studentData?.kelas, "online")) {
-        const sub = student.examSubmissions?.find(
-          es => es.subjectName === activeSubject.name && es.category === "UTS" && es.semester === selectedSemester
-        );
-        finalUtsValue = sub ? sub.score : "Online";
-      }
-
       let finalUasValue = existingGrade && existingGrade.uas !== null ? existingGrade.uas : "";
-      if (checkIsOnline(school?.uasMode, student?.kelas || studentData?.kelas, "offline")) {
-        const sub = student.examSubmissions?.find(
-          es => es.subjectName === activeSubject.name && es.category === "UAS" && es.semester === selectedSemester
-        );
-        finalUasValue = sub ? sub.score : "Online";
-      }
-
       let finalPajValue = existingGrade && existingGrade.paj !== null ? existingGrade.paj : "";
-      if (checkIsOnline(school?.pajMode, student?.kelas || studentData?.kelas, "offline")) {
-        const sub = student.examSubmissions?.find(
-          es => es.subjectName === activeSubject.name && es.category === "PAJ" && es.semester === selectedSemester
-        );
-        finalPajValue = sub ? sub.score : "Online";
-      }
 
       rows.push([
         student.nisn,
@@ -2154,32 +2120,9 @@ export default function PortalGuru() {
           try {
             const studentData = students.find(s => s.nisn === nisn);
             
-            // UTS
             let finalUts = parseScore(utsRaw, "Nilai UTS");
-            if (checkIsOnline(school?.utsMode, student?.kelas || studentData?.kelas, "online")) {
-              const sub = studentData?.examSubmissions?.find(
-                es => es.subjectName === activeSubject.name && es.category === "UTS" && es.semester === selectedSemester
-              );
-              finalUts = sub ? sub.score : null;
-            }
-
-            // UAS
             let finalUas = parseScore(uasRaw, "Nilai UAS");
-            if (checkIsOnline(school?.uasMode, student?.kelas || studentData?.kelas, "offline")) {
-              const sub = studentData?.examSubmissions?.find(
-                es => es.subjectName === activeSubject.name && es.category === "UAS" && es.semester === selectedSemester
-              );
-              finalUas = sub ? sub.score : null;
-            }
-
-            // PAJ
             let finalPaj = parseScore(pajRaw, "Nilai PAJ");
-            if (checkIsOnline(school?.pajMode, student?.kelas || studentData?.kelas, "offline")) {
-              const sub = studentData?.examSubmissions?.find(
-                es => es.subjectName === activeSubject.name && es.category === "PAJ" && es.semester === selectedSemester
-              );
-              finalPaj = sub ? sub.score : null;
-            }
 
             gradesArray.push({
               studentNisn: nisn,
@@ -3587,8 +3530,8 @@ export default function PortalGuru() {
                                 className="form-input" 
                                 value={
                                   students.find(s => s.nisn === selectedStudentNisn)
-                                    ?.examSubmissions?.find(es => es.subjectName === activeSubject?.name && es.category === "UTS" && es.semester === selectedSemester)
-                                    ?.score ?? "Belum Ujian"
+                                    ?.grades?.find(g => g.subjectName === activeSubject?.name && g.semester === selectedSemester)
+                                    ?.uts ?? "Belum Ujian"
                                 } 
                                 disabled 
                                 style={{ backgroundColor: "#e2e8f0", fontWeight: "bold" }} 
@@ -3618,8 +3561,8 @@ export default function PortalGuru() {
                                 className="form-input" 
                                 value={
                                   students.find(s => s.nisn === selectedStudentNisn)
-                                    ?.examSubmissions?.find(es => es.subjectName === activeSubject?.name && es.category === "UAS" && es.semester === selectedSemester)
-                                    ?.score ?? "Belum Ujian"
+                                    ?.grades?.find(g => g.subjectName === activeSubject?.name && g.semester === selectedSemester)
+                                    ?.uas ?? "Belum Ujian"
                                 } 
                                 disabled 
                                 style={{ backgroundColor: "#e2e8f0", fontWeight: "bold" }} 

@@ -382,8 +382,7 @@ export async function submitStudentExamResult(subject, category, semester, score
           studentNisn: session.nisn,
           subjectName: subject,
           semester: String(semester),
-          tugas1: 80,
-          tugas2: 80,
+          
           ...updateData
         }
       });
