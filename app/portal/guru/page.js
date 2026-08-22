@@ -6010,9 +6010,13 @@ export default function PortalGuru() {
                                             <span style={{ fontSize: "0.75rem", fontWeight: "bold", color: "var(--text-muted)" }}>Soal {idx + 1} ({q.type})</span>
                                             {q.type !== "ESSAY" ? (
                                               isCorrect ? (
-                                                <span style={{ color: "#22c55e", fontWeight: "bold" }}>✓ Benar</span>
+                                                <span style={{ color: "#22c55e", fontWeight: "bold", display: "flex", alignItems: "center", gap: "0.25rem" }}>
+                                                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Benar
+                                                </span>
                                               ) : (
-                                                <span style={{ color: "#ef4444", fontWeight: "bold" }}>✗ Salah</span>
+                                                <span style={{ color: "#ef4444", fontWeight: "bold", display: "flex", alignItems: "center", gap: "0.25rem" }}>
+                                                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Salah
+                                                </span>
                                               )
                                             ) : (
                                               <span style={{ color: "#6366f1", fontWeight: "bold" }}>📝 Uraian</span>
@@ -6081,7 +6085,7 @@ export default function PortalGuru() {
                                                       handleSaveEssayScore(q.id, 3);
                                                     }}
                                                   >
-                                                    ✅ Benar
+                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Benar
                                                   </button>
                                                   
                                                   <button 
@@ -6103,7 +6107,7 @@ export default function PortalGuru() {
                                                       handleSaveEssayScore(q.id, 0);
                                                     }}
                                                   >
-                                                    ❌ Salah
+                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Salah
                                                   </button>
 
                                                 </div>
