@@ -668,7 +668,7 @@ export default function PortalSiswa() {
       </section>
 
       <div className="portal-wrapper" style={{
-        backgroundColor: dashboardData?.student?.unit === "SMP" ? "#f0f9ff" : "var(--bg-alt)",
+        backgroundColor: dashboardData?.student?.unit === "SMP" ? "rgba(240, 249, 255, 0.85)" : "transparent",
         minHeight: "100vh"
       }}>
         <div className="container">
