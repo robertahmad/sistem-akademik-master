@@ -414,6 +414,7 @@ export default function PortalGuru() {
   // 3.b Hasil Ujian Tab
   const [submissions, setSubmissions] = useState([]);
   const [selectedSubmission, setSelectedSubmission] = useState(null);
+  const [correctionTab, setCorrectionTab] = useState("PG");
   const [hasilCategory, setHasilCategory] = useState("UTS");
   const [hasilSemester, setHasilSemester] = useState("1");
   const [overrideScoreInput, setOverrideScoreInput] = useState("");
@@ -5936,12 +5937,58 @@ export default function PortalGuru() {
 
                                 {/* Rincian Jawaban Soal per Soal */}
                                 <h4 style={{ fontWeight: 700, color: "var(--primary-dark)", marginBottom: "0.75rem" }}>Analisis Butir Soal:</h4>
+                                
+                                {/* TABS KOREKSI */}
+                                <div style={{ display: "flex", borderBottom: "1px solid #e2e8f0", marginBottom: "1rem" }}>
+                                  {(() => {
+                                    const activeExamSchedule = examSchedules?.find(e => e.subjectName === activeSubject?.name && e.category === hasilCategory && e.semester === hasilSemester);
+                                    const wPG = activeExamSchedule?.weightPG ?? 100;
+                                    const wIsian = activeExamSchedule?.weightIsian ?? 0;
+                                    const wEssay = activeExamSchedule?.weightEssay ?? 0;
+
+                                    const tabs = [
+                                      { id: "PG", label: `PG (${wPG}%)` },
+                                      { id: "PGK", label: "PGK" },
+                                      { id: "ISIAN", label: `ISIAN SINGKAT (${wIsian}%)` },
+                                      { id: "ESSAY", label: `URAIAN/ESSAY (${wEssay}%)` }
+                                    ];
+
+                                    return tabs.map(tab => (
+                                      <button
+                                        key={tab.id}
+                                        type="button"
+                                        onClick={() => setCorrectionTab(tab.id)}
+                                        style={{
+                                          flex: 1,
+                                          padding: "0.75rem",
+                                          textAlign: "center",
+                                          fontWeight: "bold",
+                                          fontSize: "0.85rem",
+                                          backgroundColor: "transparent",
+                                          border: "none",
+                                          borderBottom: correctionTab === tab.id ? "3px solid #ef4444" : "3px solid transparent",
+                                          color: correctionTab === tab.id ? "#ef4444" : "#64748b",
+                                          cursor: "pointer",
+                                          transition: "all 0.2s"
+                                        }}
+                                      >
+                                        {tab.label}
+                                      </button>
+                                    ));
+                                  })()}
+                                </div>
+
                                 <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
                                   {(() => {
                                     const examQuestions = questions.filter(q => q.subject === activeSubject?.name && q.category === hasilCategory && q.semester === hasilSemester);
                                     if (examQuestions.length === 0) return <p style={{ fontStyle: "italic", color: "var(--text-muted)" }}>Soal tidak ditemukan untuk kategori ujian ini.</p>;
 
-                                    return examQuestions.map((q, idx) => {
+                                    // Filter by active tab
+                                    const filteredQuestions = examQuestions.filter(q => q.type === correctionTab || (!q.type && correctionTab === "PG"));
+                                    
+                                    if (filteredQuestions.length === 0) return <p style={{ fontStyle: "italic", color: "var(--text-muted)", textAlign: "center", padding: "2rem" }}>Tidak ada soal untuk kategori {correctionTab} ini.</p>;
+
+                                    return filteredQuestions.map((q, idx) => {
                                       const studentAns = selectedSubmission.answers?.[q.id];
                                       let isCorrect = false;
                                       
@@ -6018,34 +6065,52 @@ export default function PortalGuru() {
                                                 <div>Jawaban Siswa: <strong style={{ color: isCorrect ? "#22c55e" : "#ef4444" }}>{studentAns || "Tidak Dijawab"}</strong></div>
                                                 <div>Kunci Jawaban: <strong>{q.correctAnswer}</strong></div>
                                                 <div style={{ marginTop: "1rem", display: "flex", gap: "0.5rem", alignItems: "center", backgroundColor: "#fff7ed", padding: "0.5rem", borderRadius: "4px" }}>
-                                                  <label style={{ fontSize: "0.8rem", fontWeight: "bold", color: "#c2410c" }}>Koreksi Manual Isian (0-10):</label>
-                                                  <input 
-                                                    type="number" 
-                                                    className="form-input" 
-                                                    style={{ width: "80px", padding: "0.25rem", fontSize: "0.8rem" }}
-                                                    defaultValue={selectedSubmission.essayScores?.[q.id] ?? (isCorrect ? "10" : "0")}
-                                                    id={`isian-score-${q.id}`}
-                                                    min="0" max="10"
-                                                  />
+                                                  <label style={{ fontSize: "0.85rem", fontWeight: "bold", color: "#c2410c", marginRight: "1rem" }}>Koreksi Isian Singkat:</label>
+                                                  
                                                   <button 
                                                     type="button" 
-                                                    className="btn btn-primary"
-                                                    style={{ padding: "0.25rem 0.75rem", fontSize: "0.8rem", backgroundColor: "#ea580c", borderColor: "#ea580c" }}
+                                                    style={{ 
+                                                      padding: "0.4rem 1rem", 
+                                                      fontSize: "0.85rem", 
+                                                      fontWeight: "bold",
+                                                      backgroundColor: (selectedSubmission.essayScores?.[q.id] == 3 || (selectedSubmission.essayScores?.[q.id] === undefined && isCorrect)) ? "#22c55e" : "#e5e7eb", 
+                                                      color: (selectedSubmission.essayScores?.[q.id] == 3 || (selectedSubmission.essayScores?.[q.id] === undefined && isCorrect)) ? "white" : "#374151",
+                                                      border: "none",
+                                                      borderRadius: "20px",
+                                                      cursor: "pointer",
+                                                      display: "flex",
+                                                      alignItems: "center",
+                                                      gap: "0.25rem"
+                                                    }}
                                                     onClick={() => {
-                                                      const val = document.getElementById(`isian-score-${q.id}`).value;
-                                                      if(val !== "") {
-                                                        const num = parseInt(val, 10);
-                                                        if (num >= 0 && num <= 10) {
-                                                          handleSaveEssayScore(q.id, val);
-                                                        } else {
-                                                          alert("Nilai isian maksimal adalah 10");
-                                                        }
-                                                      }
-                                                      else alert("Nilai tidak boleh kosong");
+                                                      handleSaveEssayScore(q.id, 3);
                                                     }}
                                                   >
-                                                    Simpan Override
+                                                    ✅ Benar
                                                   </button>
+                                                  
+                                                  <button 
+                                                    type="button" 
+                                                    style={{ 
+                                                      padding: "0.4rem 1rem", 
+                                                      fontSize: "0.85rem", 
+                                                      fontWeight: "bold",
+                                                      backgroundColor: (selectedSubmission.essayScores?.[q.id] == 0 || (selectedSubmission.essayScores?.[q.id] === undefined && !isCorrect)) ? "#ef4444" : "#e5e7eb", 
+                                                      color: (selectedSubmission.essayScores?.[q.id] == 0 || (selectedSubmission.essayScores?.[q.id] === undefined && !isCorrect)) ? "white" : "#374151",
+                                                      border: "none",
+                                                      borderRadius: "20px",
+                                                      cursor: "pointer",
+                                                      display: "flex",
+                                                      alignItems: "center",
+                                                      gap: "0.25rem"
+                                                    }}
+                                                    onClick={() => {
+                                                      handleSaveEssayScore(q.id, 0);
+                                                    }}
+                                                  >
+                                                    ❌ Salah
+                                                  </button>
+
                                                 </div>
                                               </>
                                             )}
