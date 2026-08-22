@@ -153,9 +153,13 @@ export default function AbsenCepatPage() {
   // Handle USB scanner input form submission
   const handleUsbSubmit = async (e) => {
     e.preventDefault();
-    if (!nisnInput.trim()) return;
-    const currentNisn = nisnInput.trim();
-    setNisnInput("");
+    if (!inputRef.current) return;
+    const currentNisn = inputRef.current.value.trim();
+    if (!currentNisn) return;
+    
+    inputRef.current.value = ""; // clear instantly without waiting for state
+    setNisnInput(""); // keep state sync just in case
+    
     await triggerScan(currentNisn);
   };
 
@@ -542,8 +546,8 @@ export default function AbsenCepatPage() {
                   type="text"
                   className="form-input"
                   placeholder="Arahkan kursor & scan QR di sini..."
-                  value={nisnInput}
-                  onChange={(e) => setNisnInput(e.target.value)}
+                  defaultValue=""
+                  autoComplete="off"
                   style={{
                     width: "100%",
                     textAlign: "center",
