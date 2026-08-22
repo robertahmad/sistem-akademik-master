@@ -5877,7 +5877,7 @@ export default function PortalGuru() {
                                                   setOverrideScoreInput(String(sub.score));
                                                 }}
                                               >
-                                                🔍 Periksa
+                                                <span style={{ display: "flex", alignItems: "center", gap: "0.3rem", justifyContent: "center" }}><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> Periksa</span>
                                               </button>
                                             ) : (
                                               <button className="btn btn-outline" disabled style={{ padding: "0.25rem 0.5rem", fontSize: "0.75rem", opacity: 0.5 }}>-</button>
@@ -5918,7 +5918,7 @@ export default function PortalGuru() {
                                     />
                                   </div>
                                   <button type="submit" className="btn btn-primary" style={{ alignSelf: "flex-end", height: "42px" }}>
-                                    💾 Simpan Nilai Baru
+                                    <span style={{ display: "flex", alignItems: "center", gap: "0.3rem", justifyContent: "center" }}><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg> Simpan Nilai Baru</span>
                                   </button>
                                 </form>
 
@@ -5926,11 +5926,11 @@ export default function PortalGuru() {
                                 {selectedSubmission.filePath && (
                                   <div style={{ backgroundColor: "#fef3c7", border: "1px solid #f59e0b", padding: "1rem", borderRadius: "var(--radius-sm)", marginBottom: "1.5rem", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                                     <div>
-                                      <span style={{ fontSize: "0.85rem", fontWeight: "bold", color: "#b45309" }}>📂 Lembar Jawaban Dokumen Siswa</span>
+                                      <span style={{ fontSize: "0.85rem", fontWeight: "bold", color: "#b45309" }}><span style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg> Lembar Jawaban Dokumen Siswa</span></span>
                                       <div style={{ fontSize: "0.75rem", color: "#b45309" }}>Siswa melampirkan berkas jawaban mandiri.</div>
                                     </div>
                                     <a href={selectedSubmission.filePath} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ backgroundColor: "#d97706", borderColor: "#d97706", padding: "0.4rem 0.8rem", fontSize: "0.8rem" }}>
-                                      📥 Unduh Jawaban
+                                      <span style={{ display: "flex", alignItems: "center", gap: "0.3rem", justifyContent: "center" }}><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> Unduh Jawaban</span>
                                     </a>
                                   </div>
                                 )}
@@ -6142,7 +6142,7 @@ export default function PortalGuru() {
                                                       else alert("Nilai tidak boleh kosong");
                                                     }}
                                                   >
-                                                    Simpan Skor Uraian
+                                                    <span style={{ display: "flex", alignItems: "center", gap: "0.3rem", justifyContent: "center" }}><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg> Simpan Skor</span> Uraian
                                                   </button>
                                                 </div>
                                               </>
