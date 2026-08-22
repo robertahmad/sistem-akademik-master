@@ -5941,16 +5941,11 @@ export default function PortalGuru() {
                                 {/* TABS KOREKSI */}
                                 <div style={{ display: "flex", borderBottom: "1px solid #e2e8f0", marginBottom: "1rem" }}>
                                   {(() => {
-                                    const activeExamSchedule = examSchedules?.find(e => e.subjectName === activeSubject?.name && e.category === hasilCategory && e.semester === hasilSemester);
-                                    const wPG = activeExamSchedule?.weightPG ?? 100;
-                                    const wIsian = activeExamSchedule?.weightIsian ?? 0;
-                                    const wEssay = activeExamSchedule?.weightEssay ?? 0;
-
                                     const tabs = [
-                                      { id: "PG", label: `PG (${wPG}%)` },
+                                      { id: "PG", label: "PG" },
                                       { id: "PGK", label: "PGK" },
-                                      { id: "ISIAN", label: `ISIAN SINGKAT (${wIsian}%)` },
-                                      { id: "ESSAY", label: `URAIAN/ESSAY (${wEssay}%)` }
+                                      { id: "ISIAN", label: "ISIAN SINGKAT" },
+                                      { id: "ESSAY", label: "URAIAN / ESSAY" }
                                     ];
 
                                     return tabs.map(tab => (
