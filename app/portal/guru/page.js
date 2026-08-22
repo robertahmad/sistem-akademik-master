@@ -6019,7 +6019,9 @@ export default function PortalGuru() {
                                                 </span>
                                               )
                                             ) : (
-                                              <span style={{ color: "#6366f1", fontWeight: "bold" }}>📝 Uraian</span>
+                                              <span style={{ color: "#6366f1", fontWeight: "bold", display: "flex", alignItems: "center", gap: "0.25rem" }}>
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg> Uraian
+                                              </span>
                                             )}
                                           </div>
                                           
@@ -6123,14 +6125,14 @@ export default function PortalGuru() {
                                                 </div>
                                                 {q.correctAnswer && <div style={{ marginTop: "0.25rem" }}>Pedoman Penskoran: <strong>{q.correctAnswer}</strong></div>}
                                                 <div style={{ marginTop: "1rem", display: "flex", gap: "0.5rem", alignItems: "center", backgroundColor: "#e0e7ff", padding: "0.5rem", borderRadius: "4px" }}>
-                                                  <label style={{ fontSize: "0.8rem", fontWeight: "bold", color: "#3730a3" }}>Beri Nilai Uraian (0-100):</label>
+                                                  <label style={{ fontSize: "0.8rem", fontWeight: "bold", color: "#3730a3" }}>Beri Nilai Uraian (0-10):</label>
                                                   <input 
                                                     type="number" 
                                                     className="form-input" 
                                                     style={{ width: "80px", padding: "0.25rem", fontSize: "0.8rem" }}
                                                     defaultValue={selectedSubmission.essayScores?.[q.id] ?? ""}
                                                     id={`essay-score-${q.id}`}
-                                                    min="0" max="100"
+                                                    min="0" max="10"
                                                   />
                                                   <button 
                                                     type="button" 
@@ -6138,8 +6140,14 @@ export default function PortalGuru() {
                                                     style={{ padding: "0.25rem 0.75rem", fontSize: "0.8rem", backgroundColor: "#4f46e5", borderColor: "#4f46e5" }}
                                                     onClick={() => {
                                                       const val = document.getElementById(`essay-score-${q.id}`).value;
-                                                      if(val !== "") handleSaveEssayScore(q.id, val);
-                                                      else alert("Nilai tidak boleh kosong");
+                                                      if(val !== "") {
+                                                        const num = parseInt(val, 10);
+                                                        if (num >= 0 && num <= 10) {
+                                                          handleSaveEssayScore(q.id, val);
+                                                        } else {
+                                                          alert("Batas nilai uraian adalah maksimal 10!");
+                                                        }
+                                                      } else alert("Nilai tidak boleh kosong");
                                                     }}
                                                   >
                                                     <span style={{ display: "flex", alignItems: "center", gap: "0.3rem", justifyContent: "center" }}><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg> Simpan Skor</span> Uraian
